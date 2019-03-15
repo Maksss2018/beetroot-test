@@ -1,66 +1,97 @@
-import React, {useState, useEffect , useContext} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Context} from "./../Context"
 import './Item.css';
 
 
-const Item = (props) => {
-    let {
+
+class ItemShugar extends Component {
+
+    static contextType = Context;
+    state = {
+        packed:false,
+        id:"",
+        value:"",
+        trgSearch: ""
+    };
+
+    trgGenerator = ()=>{
+        let {
             packedItem,
-            unPackedItem,
-         //   dataInputs,
+            unPackedItem
+        } = this.context;
+        let rez =packed?packedItem:unPackedItem;
+        return rez!==undefined?rez.toLowerCase():''
+    }
+    componentDidMount() {
+        let flag = false;
+        if(!flag){
+            this.setState({
+                trgSearch:this.trgGenerator()
+            });
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+
+        if(packed){
+           if(this.context.packedItem!==this.state.packedItem){
+               let {packedItem} = this.context;
+               this.setState({
+                   packedItem,
+                   trgSearch:this.trgGenerator()
+               })
+           }
+
+        } else {
+            if(this.context.unPackedItem!==this.state.unPackedItem){
+
+                let {unPackedItem} = this.context;
+                this.setState({
+                    unPackedItem,
+                    trgSearch:this.trgGenerator()
+                })
+
+            }
+
+        }
+    }
+
+
+    render() {
+        let {
             handelRemove,
             handelUpdate
-        } = useContext(Context)/*,
-        {
-            unPackedItem,
-            packedItem
-        } = dataInputs*/,
-        [newState,setNewState] = useState(props),
-        {
-            packed,
-            id,
-            value
-        } = newState,
-        trgGenerator = ()=>{
-            let rez =packed?packedItem:unPackedItem;
-            return rez!==undefined?rez.toLowerCase():''
-        },
-        [trgSearch,setTrgSearch] = useState(trgGenerator());
+        } = this.context,
+            {
+                trgSearch,
+                value,
+                packed,
+                id
+            } = this.state;
+        return (
+            <li className={` ${
+                trgSearch!==""?
+                    value.toLowerCase().includes(
+                        trgSearch
+                    )?"bg-warning"
+                        :"":""} item-box list-group-item`}>
+                <div className="form-check">
+                    <input className="form-check-input"
+                           type="checkbox"
+                           checked={packed}
+                           onChange={(e) => {handelUpdate(e)}}
+                           id={id}
+                    />
+                    <label className="form-check-label" htmlFor={ id}> { value }</label>
+                </div>
+                <button className="btn btn-secondary btn-sm" value={id} onClick={(e) => {handelRemove(e)}}>Remove</button>
 
-
-
-    useEffect(()=>{
-        setNewState(props);
-        setTrgSearch(trgGenerator());
-    },[props,unPackedItem,
-        packedItem]);
-
-    return (
-        <li className={` ${
-            trgSearch!==""?
-            value.toLowerCase().includes(
-                trgSearch
-            )?"bg-warning"
-                :"":""} item-box list-group-item`}>
-            <div className="form-check">
-                <input className="form-check-input"
-                       type="checkbox"
-                       checked={packed}
-                       onChange={(e) => {handelUpdate(e)}}
-                       id={id}
-                />
-                <label className="form-check-label" htmlFor={ id}> { value }</label>
-            </div>
-            <button className="btn btn-secondary btn-sm" value={id} onClick={(e) => {handelRemove(e)}}>Remove</button>
-
-        </li>
-
-    );
+            </li>
+        );
+    }
 }
 
-Item.propTypes = {
+ItemShugar.propTypes = {};
 
-};
-
-export default Item;
+export default ItemShugar;

@@ -1,31 +1,59 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Context} from "../../src/Context"
 
 
-function Filter(props) {
-   let [{value,flag},setValue] = useState("");
-    let {updateSearchTerm} = props;
-    useEffect(()=>{
-        if(value!=props.searchTerm){
-            setValue(props.searchTerm);
+
+
+class FilterShugar extends Component {
+
+    state ={
+        value:"",
+        flag:false
+    };
+
+    componentDidMount() {
+
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.searchTerm!==this.state.value){
+            let {searchTerm} = nextProps;
+            this.setState({value:searchTerm});
         }
-    },[props.searchTerm]);
-    return (
-        <div className="mb-3">
-            <input type="text"
-                   className="form-control"
-                   value={value}
-                   name={`${props.flag?"packedItem":"unPackedItem"}`}
-                   onChange={e=>updateSearchTerm(e)}
-            />
-        </div>
-    );
+    }
+
+
+
+    render() {
+        const {
+            flag,
+            updateSearchTerm,
+        } = this.props;
+        let {
+            value,
+            setState
+        } =this.state;
+        return (
+            <div className="mb-3">
+                <input type="text"
+                       className="form-control"
+                       value={value}
+                       name={`${flag?"packedItem":"unPackedItem"}`}
+                       onChange={(e)=>{
+                           updateSearchTerm(e);
+                           setState({value:""})
+                       }}
+                />
+            </div>
+        );
+    }
 }
 
-Filter.propTypes = {
+FilterShugar.propTypes = {
+    updateSearchTerm:PropTypes.func.isRequired,
+    searchTerm : PropTypes.string.isRequired,
 
 };
 
-
-export default Filter;
+export default FilterShugar;

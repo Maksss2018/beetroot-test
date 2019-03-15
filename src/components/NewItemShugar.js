@@ -38,7 +38,10 @@ class NewItemShugar extends Component {
         let {value} =this.state;
         console.dir(this.context);
         return (
-            <form onSubmit={ handleSubmit}>
+            <form onSubmit={(e) =>{
+                handleSubmit(e);
+                this.setState({value:""});
+            }}>
                 <div className="row">
                     <div className="col-md-10">
                         <input
