@@ -2,11 +2,12 @@ import React from 'react';
 import {render} from 'react-dom';
 
 import App from './App';
+import AppShugar from './AppShugar';
 
 
 
 
 render(
-    <App />,
+    <AppShugar />,
      document.getElementById('root')
 );
