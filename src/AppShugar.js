@@ -24,24 +24,15 @@ class   AppShugar extends Component{
             }
             return item
         });
-        this.setState({defaultData:newData});
+        this.setState({
+            defaultData:newData,
+            unPackedItem:""
+        });
     };
 
     handelChange = (e) => {
         let {name,value} = e.target;
         this.setState({[name]:value});
-        /*
-         switch (name) {
-             case "packedItem":
-                 setPackedItem(value);
-                 break;
-             case "unPackedItem":
-                 setUnPackedItem(value);
-                 break;
-             case "newItem":
-                 setNewItem(value);
-                 break;
-         }*/
     };
     handleSubmit = (e) => {
         e.preventDefault();

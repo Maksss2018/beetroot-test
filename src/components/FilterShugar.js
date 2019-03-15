@@ -8,8 +8,7 @@ import {Context} from "../../src/Context"
 class FilterShugar extends Component {
 
     state ={
-        value:"",
-        flag:false
+        value:""
     };
 
     componentDidMount() {
@@ -27,8 +26,8 @@ class FilterShugar extends Component {
 
     render() {
         const {
-            flag,
             updateSearchTerm,
+            name
         } = this.props;
         let {
             value,
@@ -39,7 +38,7 @@ class FilterShugar extends Component {
                 <input type="text"
                        className="form-control"
                        value={value}
-                       name={`${flag?"packedItem":"unPackedItem"}`}
+                       name={name}
                        onChange={(e)=>{
                            updateSearchTerm(e);
                            setState({value:""})

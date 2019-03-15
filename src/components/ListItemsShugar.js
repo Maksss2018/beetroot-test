@@ -34,29 +34,27 @@ class ListItemsShugar extends Component {
             const { items } = nextProps;
             this.setState({items})
         }
-        if(nextProps.flag!==this.state.flag){
-            let { flag } = nextProps;
-            this.setState({flag});
-        }
-    }
+         }
     componentWillUnmount() {
 
     }
 
     render() {
+        const {
+            flag
+        } =this.props;
         let {
             items,
-            value,
-            flag
-        }  = this.state;
+            value }  = this.state;
         return (
             <section>
                 <h3 className="mb-3">
                     Title
                 </h3>
-                <Filter  flag={flag} searchTerm={value} updateSearchTerm={this.updateSearchTerm} />
+                <Filter  flag={flag} name={flag?"packedItem":"unPackedItem"} searchTerm={value} updateSearchTerm={this.updateSearchTerm} />
                 <ul className="list-group mb-3">
                     {items.map((item,ind)=><Item
+                        name={flag?"packedItem":"unPackedItem"}
                         key={item.id}
                         {...item}/>)}
                 </ul>

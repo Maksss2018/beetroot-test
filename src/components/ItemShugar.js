@@ -16,11 +16,8 @@ class ItemShugar extends Component {
     };
 
     trgGenerator = ()=>{
-        let {
-            packedItem,
-            unPackedItem
-        } = this.context;
-        let rez =packed?packedItem:unPackedItem;
+        const {name} = this.props;
+        let rez =  this.context[name];
         return rez!==undefined?rez.toLowerCase():''
     }
     componentDidMount() {
@@ -33,27 +30,11 @@ class ItemShugar extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-
-        if(packed){
-           if(this.context.packedItem!==this.state.packedItem){
-               let {packedItem} = this.context;
-               this.setState({
-                   packedItem,
-                   trgSearch:this.trgGenerator()
-               })
-           }
-
-        } else {
-            if(this.context.unPackedItem!==this.state.unPackedItem){
-
-                let {unPackedItem} = this.context;
-                this.setState({
-                    unPackedItem,
-                    trgSearch:this.trgGenerator()
-                })
-
-            }
-
+   const {name}  = this.props ;
+        if(this.context[name]!==this.state.trgSearch){
+            this.setState({
+                trgSearch:this.context[name]
+            })
         }
     }
 
@@ -92,6 +73,8 @@ class ItemShugar extends Component {
     }
 }
 
-ItemShugar.propTypes = {};
+ItemShugar.propTypes = {
+    name: PropTypes.string.isRequired
+};
 
 export default ItemShugar;
