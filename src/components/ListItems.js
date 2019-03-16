@@ -25,9 +25,20 @@ const  ListItems = (props) => {
             </h3>
             <Filter  flag={flag} searchTerm={value} updateSearchTerm={updateSearchTerm} />
             <ul className="list-group mb-3">
-                {items.map((item,ind)=><Item
-                    key={item.id}
-                    {...item}/>)}
+                {items.map((item,ind)=>{
+                    console.log(" onChange ()");
+                    return <Item
+                        isSelected={(
+                            value!==""?
+                            item.value.toLowerCase().includes(
+                                value.toLowerCase()
+                            )?"bg-warning"
+                                :""
+                            :""
+                        )}
+                        key={item.id}
+                        {...item}/>
+                })}
             </ul>
         </section>
     );

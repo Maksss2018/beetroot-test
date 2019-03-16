@@ -52,20 +52,27 @@ class   AppSugar extends Component{
         let {
             defaultData
         } = this.state;
-       /* const trgIndex =  defaultData.map((el)=>el.id).indexOf(e.target.value);
-        defaultData = defaultData.filter((el,ind) =>el.id!==trgIndex);
-        this.setState({defaultData});
-        */
+        /* const trgIndex =  defaultData.map((el)=>el.id).indexOf(e.target.value);
+         defaultData = defaultData.filter((el,ind) =>el.id!==trgIndex);
+         this.setState({defaultData});
+         */
         defaultData = defaultData.filter((el,ind) =>el.id!==e.target.value);
-       this.setState({defaultData});
+        this.setState({defaultData});
     };
     handelUpdate = (e) => {
         let {
             defaultData
         } = this.state;
+     /*
         const trgIndex =  defaultData.map((el)=>el.id).indexOf(e.target.id);
         defaultData[trgIndex].packed = !defaultData[trgIndex].packed;
-        this.setState({defaultData})
+      */
+        this.setState({
+            defaultData:defaultData.map((el)=>{
+            if(el.id===e.target.id){   el.packed = !el.packed  }
+        return el
+        })
+        })
     };
 
     render(){

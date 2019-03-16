@@ -66,9 +66,13 @@ const  App = (props)=> {
                     setState(state);
                 },
                 handelUpdate:(e)=>{
-                    const trgIndex =  state.map((el)=>el.id).indexOf(e.target.id);
-                    state[trgIndex].packed = !state[trgIndex].packed;
-                    setState([...state]);
+                    const trgIndex =  state.map((el)=>{
+                        if(el.id=== e.target.id){
+                            el.packed = !el.packed;
+                        }
+                        return el
+                    });
+                    setState([...trgIndex]);
 
                 }
             }
