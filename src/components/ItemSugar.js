@@ -5,7 +5,7 @@ import './Item.css';
 
 
 
-class ItemShugar extends Component {
+class ItemSugar extends Component {
 
     static contextType = Context;
     state = {
@@ -73,8 +73,8 @@ class ItemShugar extends Component {
     }
 }
 
-ItemShugar.propTypes = {
+ItemSugar.propTypes = {
     name: PropTypes.string.isRequired
 };
 
-export default ItemShugar;
+export default ItemSugar;

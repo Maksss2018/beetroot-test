@@ -58,8 +58,11 @@ const  App = (props)=> {
                     setState([{ value: inputs.newItem , id: id(), packed: false },...state]);
                 }),
                 handelRemove:(e)=>{
-                    const trgIndex =  state.map((el)=>el.id).indexOf(e.target.value);
+  /*                  const trgIndex =  state.map((el)=>el.id).indexOf(e.target.value);
                     state = state.filter((el,ind) =>ind!==trgIndex);
+*/
+                    state = state.filter((el,ind) =>el.id!==e.target.value);
+
                     setState(state);
                 },
                 handelUpdate:(e)=>{

@@ -3,7 +3,7 @@ import { generate as id } from "shortid";
 import PropTypes from 'prop-types';
 import {Context} from "./../Context"
 
-class NewItemShugar extends Component {
+class NewItemSugar extends Component {
 
     static contextType = Context;
 
@@ -61,6 +61,6 @@ class NewItemShugar extends Component {
     }
 }
 
-export default NewItemShugar;
+export default NewItemSugar;
 
 

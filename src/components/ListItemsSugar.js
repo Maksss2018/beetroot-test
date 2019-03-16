@@ -5,7 +5,7 @@ import Filter from './Filter';
 import {Context} from "../Context";
 
 
-class ListItemsShugar extends Component {
+class ListItemsSugar extends Component {
     static contextType = Context;
     state = {
         flag:false ,
@@ -64,9 +64,9 @@ class ListItemsShugar extends Component {
     }
 }
 
-ListItemsShugar.propTypes = {
+ListItemsSugar.propTypes = {
     items: PropTypes.array.isRequired,
     flag: PropTypes.bool.isRequired
 };
 
-export default ListItemsShugar;
+export default ListItemsSugar;

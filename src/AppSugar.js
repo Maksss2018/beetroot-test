@@ -1,19 +1,22 @@
 import React, { Component} from 'react';
 import PropTypes from 'prop-types';
-import NewItemShugar from './components/NewItemShugar';
-import ListItemsShugar from './components/ListItemsShugar';
+import NewItemSugar from './components/NewItemSugar';
+import ListItemsSugar from './components/ListItemsSugar';
+
 import defaultState from './data';
+
+
 import {Context} from './Context/';
 import {generate as id} from "shortid";
 
 
-class   AppShugar extends Component{
+class   AppSugar extends Component{
     state = {
         newItem:"",
         packedItem:"",
         unPackedItem:"",
         value:"",
-        defaultData: defaultState||null
+        defaultData: defaultState||null,
     };
 
     selectAll = (e) => {
@@ -49,9 +52,12 @@ class   AppShugar extends Component{
         let {
             defaultData
         } = this.state;
-        const trgIndex =  defaultData.map((el)=>el.id).indexOf(e.target.value);
-        defaultData = defaultData.filter((el,ind) =>ind!==trgIndex);
+       /* const trgIndex =  defaultData.map((el)=>el.id).indexOf(e.target.value);
+        defaultData = defaultData.filter((el,ind) =>el.id!==trgIndex);
         this.setState({defaultData});
+        */
+        defaultData = defaultData.filter((el,ind) =>el.id!==e.target.value);
+       this.setState({defaultData});
     };
     handelUpdate = (e) => {
         let {
@@ -85,13 +91,13 @@ class   AppShugar extends Component{
                 }
             }>
                 <div className="container py-3">
-                    <NewItemShugar />
+                    <NewItemSugar />
                     <div className="row">
                         <div className="col-md-5">
-                            <ListItemsShugar flag={false} title="Unpacked Items" items={defaultData.filter((el)=>!el.packed)} />
+                            <ListItemsSugar flag={false} title="Unpacked Items" items={defaultData.filter((el)=>!el.packed)} />
                         </div>
                         <div className="offset-md-2 col-md-5">
-                            <ListItemsShugar flag={true} title="Packed Items" items={defaultData.filter((el)=>el.packed)}/>
+                            <ListItemsSugar flag={true} title="Packed Items" items={defaultData.filter((el)=>el.packed)}/>
                             <button
                                 onClick={this.selectAll}
                                 className="btn btn-danger btn-lg btn-block">
@@ -102,6 +108,7 @@ class   AppShugar extends Component{
                     </div>
 
 
+
                 </div>
             </Context.Provider>
         );
@@ -109,8 +116,8 @@ class   AppShugar extends Component{
 
 }
 
-AppShugar.propTypes = {
+AppSugar.propTypes = {
     defaultState:PropTypes.array
 };
 
-export default AppShugar;
+export default AppSugar;

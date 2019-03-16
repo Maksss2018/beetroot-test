@@ -5,7 +5,7 @@ import {Context} from "../../src/Context"
 
 
 
-class FilterShugar extends Component {
+class FilterSugar extends Component {
 
     state ={
         value:""
@@ -49,10 +49,10 @@ class FilterShugar extends Component {
     }
 }
 
-FilterShugar.propTypes = {
+FilterSugar.propTypes = {
     updateSearchTerm:PropTypes.func.isRequired,
     searchTerm : PropTypes.string.isRequired,
 
 };
 
-export default FilterShugar;
+export default FilterSugar;
