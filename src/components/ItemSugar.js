@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, { PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {Context} from "./../Context"
 import './Item.css';
 
 
 
-class ItemSugar extends Component {
+class ItemSugar extends PureComponent {
 
     static contextType = Context;
     state = {
