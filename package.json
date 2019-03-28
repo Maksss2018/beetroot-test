@@ -3,15 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "flow": "^0.2.3",
+    "lodash": "^4.17.11",
+    "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8"
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "2.1.8",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.86.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint ./src"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -21,5 +28,10 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "eslint": "^5.12.0",
+    "react-image-fallback": "^8.0.0",
+    "shortid": "^2.2.14"
+  }
 }
