@@ -14,6 +14,13 @@
 /node_modules
 /.pnp
 .pnp.js
+/*.zip
+/HTML
+/src_
+/src_
+/src_2
+/src_3
+/11_Project_Films
 
 # testing
 /coverage
