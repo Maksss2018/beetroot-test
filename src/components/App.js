@@ -5,18 +5,18 @@ import {films} from "../data"
 import FilmForm from "./forms/FilmForm"
 import TopNavigation from "./TopNavigation"
 
-export const AppContext = React.createContext()
+export const AppContext = React.createContext();
 
 class App extends Component {
   state = {
     items: [],
     showAddForm: false,
-  }
+  };
 
   componentDidMount() {
     this.setState({items: this.sortFilms(films)})
   }
-  sortFilms = films => _orderBy(films, ["featured", "title"], ["desc", "asc"])
+  sortFilms = films => _orderBy(films, ["featured", "title"], ["desc", "asc"]);
 
   toggleFeatured = id =>
     this.setState(({items}) => ({
@@ -25,19 +25,22 @@ class App extends Component {
           item._id === id ? {...item, featured: !item.featured} : item,
         ),
       ),
-    }))
+    }));
 
-  showAddForm = () => this.setState({showAddForm: true})
+  showAddForm = () => this.setState({showAddForm: true});
 
-  hideAddForm = () => this.setState({showAddForm: false})
+  hideAddForm = () => this.setState({showAddForm: false});
 
   render() {
-    const {items, showAddForm} = this.state
-    const cls = showAddForm ? "ten" : "sixteen"
+    const {items, showAddForm} = this.state;
+    const cls = showAddForm ? "ten" : "sixteen";
     return (
       <AppContext.Provider
         value={{
           toggledFeatured: this.toggleFeatured,
+          store: (name,val)=>localStorage.setItem(name,val),
+          get: (name)=>localStorage.getItem(name),
+          reqEmail:  val => fetch(`${val}`).then(res => res.json()).then(res=>res)
         }}
       >
         <div className="ui container pt-3">
