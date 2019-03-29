@@ -110,3 +110,7 @@ button:active {
 .pb-5 {
     padding-bottom: 3rem;
 }
+
+.ml-auto{
+    margin-left: auto!important;
+}

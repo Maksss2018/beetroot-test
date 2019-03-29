@@ -28,14 +28,34 @@ class RegistrationForm extends Component {
     state = {
         data: initialData,
         errors: {},
-        timeout:false
+        timeout:false,
+        submit:false
     };
 
-
+    /*
+    * TODO:
+    * disable  window Save pass /login  for  mozilla if error
+    *
+    * */
     handleSubmit = e => {
         e.preventDefault();
-        const {password,email} = this.state.data;
-        const {store,getStore,reqEmail}= this.context;
+        const {errors} = this.state;
+        if(Object.keys(errors).length!==0){
+            this.setState({
+                errors : {
+                    btn:" negative ",
+                    ...errors
+                }
+                ,submit:true
+            })
+        } else {
+            let {  btn, ...allOther} = errors;
+
+            this.setState({
+                errors : {...allOther},
+                submit:true
+            })
+        }
 
     };
 
@@ -55,7 +75,7 @@ class RegistrationForm extends Component {
                 } else {
                     let { email,...errors } =this.state.errors,
                         {store,reqEmail,get}= this.context;//,
-                      //  flag = async () => await reqEmail(value);
+                    //  flag = async () => await reqEmail(value);
                     this.setState({errors: {...errors }});
                     /*
 
@@ -111,7 +131,7 @@ class RegistrationForm extends Component {
 
 
     render() {
-        const {data, errors} = this.state;
+        const {data, errors,submit} = this.state;
         return (
             <form className="ui form" onSubmit={this.handleSubmit}>
                 <div className="ui  grid">
@@ -159,7 +179,7 @@ class RegistrationForm extends Component {
                 {/* END ui grid   */}
 
                 <div className="ui fluid buttons">
-                    <button className="ui button primary" type="submit">
+                    <button  className={` ${submit?errors.btn?errors.btn:"positive":"primary"} ui button `} type="submit">
                         Ok
                     </button>
                     <div className="or" />

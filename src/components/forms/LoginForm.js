@@ -33,29 +33,28 @@ class LoginForm extends Component {
     validateData = (name,value)=>{
         switch (name) {
             case "email":
-               /* DB  request  for email
-               this.requestEmail(value)
-               */
-
                 if(!value.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{3,}$/i)){
-                    this.setState({errors: {[name]:`your ${name} is not matching our conditions`}})
+                    this.setState({errors: {...this.state.errors,[name]:`your ${name} is not matching our conditions`}})
                 } else {
-                    let {...errors, email } =this.state.errors,
-                        {store,getStore,reqEmail}= this.context,
-                    flag = (async () => await reqEmail(value))===value;
+                    let { email,...errors } =this.state.errors,
+                        {store,reqEmail}= this.context,
+                        flag = async () => await reqEmail(value);
+                    /*
+                     this.setState((flag()? {...errors}:{errors: {[name]:`your ${name} is not matching our conditions`}}));
 
-                    this.setState((flag? {...errors}:{errors: {[name]:`your ${name} is not matching our conditions`}}));
-                    /* DB  request  for email
-                        this.requestEmail(value)  if true   return error
-                        */
+                          if(errors[name]){ store(name,value)};
+                    */
+                    flag()?store(name,value)
+                        :this.setState({errors: {...errors ,[name]:`There is no user with email like ${value}`}});
                 }
                 break;
             case "password":
                 if(!value.match(/^[0-9a-z]/i)&&value.length<9&&value.length>=16){
-                    this.setState({errors: {[name]:`your ${name} is not matching our conditions`}})
+                    let {errors} =this.state;
+                    this.setState({errors: {...errors ,[name]:`your ${name} is not matching our conditions`}})
                 } else {
-                    let {...errors, password } =this.state.errors;
-                    this.setState({errors});
+                    let {password,...errorsNew } =this.state.errors;
+                    this.setState({errors: {...errorsNew}});
                 }
                 break;
 
