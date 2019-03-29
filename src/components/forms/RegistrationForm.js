@@ -1,10 +1,17 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import FormMessage from "./FormMessage";
+import {AppContext} from "./../App";
 
 /*
 TODO:
   Элементы поля - email, password, cofirm_password, button OK, button Cancel
+
+* localStorage.setItem(name,value) put in promise of cross request  or  in one async function ;
+
+
+*  make function validate   for  switch  inside function validateData
+  and put it  in context
 */
 
 const initialData = {
@@ -14,56 +21,88 @@ const initialData = {
 };
 
 class RegistrationForm extends Component {
+
+    static contextType = AppContext;
+
+
     state = {
         data: initialData,
         errors: {},
+        timeout:false
     };
+
 
     handleSubmit = e => {
         e.preventDefault();
-        console.log(this.state.data)
+        const {password,email} = this.state.data;
+        const {store,getStore,reqEmail}= this.context;
+
     };
 
     handleStringChange = ({target})=>{
         const {name,value} =  target;
         this.validateData(name,value);
+
         this.setState({data: {...this.state.data, [name]: value}});
+
     };
 
     validateData = (name,value)=>{
         switch (name) {
             case "email":
-                if(!value.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{3,}$/i)){
-                    this.setState({errors: {[name]:`your ${name} is not matching our conditions`}})
+                if(!value.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{0,3}$/i)){
+                    this.setState({errors: {...this.state.errors,[name]:`your ${name} is not matching our conditions`}})
                 } else {
-                    let {...errors, email } =this.state.errors;
-                    this.setState({errors});
+                    let { email,...errors } =this.state.errors,
+                        {store,reqEmail,get}= this.context;//,
+                      //  flag = async () => await reqEmail(value);
+                    this.setState({errors: {...errors }});
+                    /*
+
+                    flag()?store(name,value)
+                        :this.setState({errors: {...errors ,[name]:`There is no user with email like ${value}`}});
+                   */
                 }
                 break;
             case "password":
-                if(!value.match(/^[0-9a-z]/i)&&value.length<9&&value.length>=16){
-                    this.setState({errors: {[name]:`your ${name} is not matching our conditions`}})
+                if(!value.match(/^[0-9a-z]/i)||value.length<=9||value.length>16){
+                    this.setState({errors: {...this.state.errors ,[name]:`your ${name} is not matching our conditions`}})
                 } else {
-                    let {...errors, password } =this.state.errors;
-                    this.setState({errors});
+                    let {password, ...errors } =this.state.errors;
+                    this.setState({errors:{...errors}});
                 }
-
                 break;
             case "confirmPass":
-                if(value !== this.state.data[name]){
+                let {data}=this.state;
+                if(value !== data.password){
                     this.setState({
                         errors: {
                             ...this.state.errors,
-                            confirmPass:"this password is not matching text in previous field"
+                            confirmPass:`this password is not matching text in previous field`
                         }
                     })
                 } else {
-                    let {...errors, confirmPass } =this.state.errors;
+                    let { confirmPass,...errors } =this.state.errors;
                     this.setState({errors});
                 }
                 break;
         }
     };
+    /*
+    validate=(name,value,fn)=>{
+        if(value !== this.state.data[name]){
+            this.setState({
+                errors: {
+                    ...this.state.errors,
+                    confirmPass:"this password is not matching text in previous field"
+                }
+            })
+        } else {
+            let {...errors, confirmPass } =this.state.errors;
+            this.setState({errors});
+            fn(name,value&&"");
+        }
+    }; */
 
     handleClearForm = () => this.setState({
         data: initialData,
