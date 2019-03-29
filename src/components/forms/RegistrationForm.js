@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import FormMessage from "./FormMessage";
 import {AppContext} from "./../App";
+import { store} from "../../utils";
+
 
 /*
 TODO:
@@ -13,6 +15,8 @@ TODO:
 *  make function validate   for  switch  inside function validateData
   and put it  in context
 */
+
+
 
 const initialData = {
     email: "",
@@ -39,7 +43,7 @@ class RegistrationForm extends Component {
     * */
     handleSubmit = e => {
         e.preventDefault();
-        const {errors} = this.state;
+        const {errors,data} = this.state;
         if(Object.keys(errors).length!==0){
             this.setState({
                 errors : {
@@ -50,6 +54,13 @@ class RegistrationForm extends Component {
             })
         } else {
             let {  btn, ...allOther} = errors;
+
+            Object.keys(data).map((item,ind)=>{
+                if(item!=="confirmPass"){
+                    store(item, data[item])
+                }
+                return item
+            });
 
             this.setState({
                 errors : {...allOther},
@@ -124,7 +135,11 @@ class RegistrationForm extends Component {
         }
     }; */
 
-    handleClearForm = () => this.setState({
+    /*
+    * TODO:
+    *  close Form
+    * */
+    handleCloseForm = () => this.setState({
         data: initialData,
         errors: {}
     });
@@ -183,7 +198,7 @@ class RegistrationForm extends Component {
                         Ok
                     </button>
                     <div className="or" />
-                    <button onClick={this.handleClearForm} className="ui button primary" type="button">
+                    <button onClick={this.handleCloseForm} className="ui button primary" type="button">
                         Cancel
                     </button>
 

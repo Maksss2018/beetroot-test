@@ -7,6 +7,7 @@ import LoginForm from "./forms/LoginForm"
 import RegistrationForm from "./forms/RegistrationForm"
 import TopNavigation from "./TopNavigation"
 
+
 export const AppContext = React.createContext({});
 
 class App extends Component {
@@ -35,9 +36,6 @@ class App extends Component {
 
     handleHideAddForm = () => this.setState({showAddForm: false});
 
-
-    reqData = val => fetch(`${val}`).then(res => res.json()).then(res=>res);
-
     render() {
         const {
             items,
@@ -49,10 +47,7 @@ class App extends Component {
         return (
             <AppContext.Provider
                 value={{
-                    toggledFeatured: this.toggleFeatured,
-                    store :this.storeData,
-                    get: this.getStoredData,
-                    reqEmail: this.reqData
+                    toggledFeatured: this.toggleFeatured
                 }}
             >
                 <div className="ui container pt-3">
