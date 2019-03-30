@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import FormMessage from "./FormMessage";
 import {AppContext} from "../App";
+import { store, get } from "../../utils";
 /*
 TODO:
   Элементы поля - email, password, button OK, button Cancel
@@ -21,7 +22,29 @@ class LoginForm extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        console.log(this.state.data)
+        const { errors, data }= this.state;
+        if(Object.keys(errors).length!==0){
+            this.setState({
+                errors : {
+                    btn:" negative ",
+                    ...errors
+                },
+                submit:true
+            })
+        } else {
+            let {  btn, ...allOther} = errors;
+
+            Object.keys(data).map((item,ind)=>{
+                    store(item, data[item]);
+                return item
+            });
+
+            this.setState({
+                errors : {...allOther},
+                submit:true
+            })
+        }
+
     };
 
     handleStringChange = ({target})=>{
@@ -36,20 +59,24 @@ class LoginForm extends Component {
                 if(!value.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{3,}$/i)){
                     this.setState({errors: {...this.state.errors,[name]:`your ${name} is not matching our conditions`}})
                 } else {
-                    let { email,...errors } =this.state.errors,
-                        {store,reqEmail}= this.context,
-                        flag = async () => await reqEmail(value);
+                    let { email,...errors } =this.state.errors;
+                        //{store,reqEmail}= this.context,
+                      //  flag = async () => await reqEmail(value);
                     /*
                      this.setState((flag()? {...errors}:{errors: {[name]:`your ${name} is not matching our conditions`}}));
 
                           if(errors[name]){ store(name,value)};
                     */
+                  /*
                     flag()?store(name,value)
                         :this.setState({errors: {...errors ,[name]:`There is no user with email like ${value}`}});
-                }
+                */
+                    store(name,value);
+                    this.setState({errors: {...errors}});
+                };
                 break;
             case "password":
-                if(!value.match(/^[0-9a-z]/i)&&value.length<9&&value.length>=16){
+                if(!value.match(/^[0-9a-z]/i)||value.length<=9||value.length>16){
                     let {errors} =this.state;
                     this.setState({errors: {...errors ,[name]:`your ${name} is not matching our conditions`}})
                 } else {
@@ -70,7 +97,8 @@ class LoginForm extends Component {
     render() {
         let {
             errors,
-            data
+            data,
+            submit
         } = this.state;
         return (
             <form className="ui form" onSubmit={this.handleSubmit}>
@@ -106,7 +134,7 @@ class LoginForm extends Component {
                 {/* END ui grid   */}
 
                 <div className="ui fluid buttons">
-                    <button className="ui button primary" type="submit">
+                    <button  className={` ${submit?errors.btn?errors.btn:"positive":"primary"} ui button `} type="submit">
                         Ok
                     </button>
                     <div className="or" />

@@ -23,7 +23,7 @@ const TopNavigation = ({
                 }}
                 className="  item" onClick={showRegistrationForm}>
       <i className={`icon sign-${1!==1?"out":"in"}`} />
-                {`${1===1?"log-in":"log-out"}`}
+                {`log-${1===1?"in":"out"}`}
     </span>
             <span className="item" id={"regIconContainer"} onClick={showLoginForm}>
                 {get("email")?get("email"):<i
