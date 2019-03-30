@@ -1,61 +1,68 @@
-import React, {Component} from "react"
-import _orderBy from "lodash/orderBy"
-import FilmsList from "./films"
-import {films} from "../data"
-import FilmForm from "./forms/FilmForm"
-import TopNavigation from "./TopNavigation"
+import React, {Component} from 'react';
+import {films, fetchData} from '../data';
+import FilmList from './films';
+import orderBy from "lodash/orderBy";
+import Error from "./../components/masseges/Error";
+import  './../css/style.css';
+import {Context} from './../Context/';
 
-export const AppContext = React.createContext()
+
 
 class App extends Component {
-  state = {
-    items: [],
-    showAddForm: false,
-  }
+    state ={
+        films:[],
+        sortByArray:["featured", "title"],
+        orderByArray:["desc", "asc"],
+        sort :false,
+        loader: true
+    };
 
-  componentDidMount() {
-    this.setState({items: this.sortFilms(films)})
-  }
-  sortFilms = films => _orderBy(films, ["featured", "title"], ["desc", "asc"])
+    async componentDidMount(){
 
-  toggleFeatured = id =>
-    this.setState(({items}) => ({
-      items: this.sortFilms(
-        items.map(item =>
-          item._id === id ? {...item, featured: !item.featured} : item,
-        ),
-      ),
-    }))
+        let films = await fetchData();
+        this.setState({films,loader:false});
+    }
 
-  showAddForm = () => this.setState({showAddForm: true})
+    /*
+    shouldComponentUpdate(nextProps, nextState){
+        return nextState.films!==this.state.films
+    }*/
 
-  hideAddForm = () => this.setState({showAddForm: false})
+    sortFilms = ({films, sortByArray, orderByArray}) => orderBy(films, sortByArray, orderByArray);
 
-  render() {
-    const {items, showAddForm} = this.state
-    const cls = showAddForm ? "ten" : "sixteen"
-    return (
-      <AppContext.Provider
-        value={{
-          toggledFeatured: this.toggleFeatured,
-        }}
-      >
-        <div className="ui container pt-3">
-          <TopNavigation showAddForm={this.showAddForm} />
-          <div className="ui stackable grid">
-            {showAddForm && (
-              <div className="six wide column">
-                <FilmForm hideAddForm={this.hideAddForm} />
-              </div>
-            )}
-            <div className={`${cls} wide column`}>
-              <FilmsList films={items} />
-            </div>
-          </div>
-        </div>
-      </AppContext.Provider>
-    )
-  }
+    handelChange = ( id,trg="featured",sort=false) => {
+        const { films } = this.state,
+            trgIndex = films.indexOf(
+                films.filter((el)=>el._id===id)[0]
+            ),
+            target = films[trgIndex];
+        target[trg] = target[trg]!==undefined ? !target[trg]: false;
+        this.setState({films:[...films], sort});
+    };
+
+    render() {
+        const {
+                films,
+                sortByArray,
+                orderByArray,
+                loader
+            } = this.state,
+            sorted = this.sortFilms({films,sortByArray, orderByArray});
+        return (
+            <Context.Provider
+                value={{
+                    handelChange: this.handelChange,
+                    films:sorted
+                }}>
+                {loader?<div className={"centered"} >
+                    <Error animation={" flash animated infinite"} text={" data is  loading "} />
+                </div>:<div className="ui container">
+                    <FilmList  />
+                </div>}
+
+            </Context.Provider>
+        )
+    }
 }
 
-export default App
+export default App;

@@ -1,8 +1,9 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-
+.idea
 /src_
+/src_current
 /src_2
 /src_3
 /11_Project_Films
@@ -10,7 +11,7 @@
 /static_files
 /*.zip
 
-
+/package-lock.json
 /node_modules
 /.pnp
 .pnp.js

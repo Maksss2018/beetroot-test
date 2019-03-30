@@ -1,46 +1,74 @@
-import React from "react"
-import PropTypes from "prop-types"
-import Featured from "./Featured"
+import React ,{ useMemo} from 'react';
+import PropTypes from 'prop-types';
+import  Featured from '../../components/FilmCardComponents/Featured'
+import  FilmsCardInfo from '../../components/FilmCardComponents/FilmsCardInfo'
+import FilmsCardImg from '../../components/FilmCardComponents/FilmsCardImg'
+import FilmDescriptionBtn from '../../components/FilmCardComponents/FilmDescriptionBtn'
 
-const FilmCard = ({film}) => {
-  return (
-    <div className="ui card">
-      <span className="ui right corner label">
-        <i className="empty star icon" />
-      </span>
-      <div className="image">
-        <span className="ui green label ribbon">$ {film.price}</span>
-        <Featured featured={film.featured} id={film._id} />
-        <img src={film.img} alt={film.title} />
-      </div>
 
-      <div className="content">
-        <span className="header">{film.title}</span>
+const  FilmCard = ({
+                       featured,
+                       eye,
+                       ...film
+                   }) => {
+    let flagEye =   useMemo(()=>eye,[eye]),
+        flagFeatured =   useMemo(()=>featured,[featured]);
 
-        <div className="meta">
-          <i className="icon users" />
-          {film.director}
-          <span className="right floated">
-            <i className="icon wait right" />
-            {film.duration} min
-          </span>
+
+    return (
+        <div
+            id={`${film._id}-film-container`}
+            className={` ui card `}>
+            {
+                <Featured
+                    id={film._id}
+                    featured={flagFeatured}/>
+            }
+
+            {
+                flagEye?<FilmsCardImg  price={film.price} img={film.img} title={film.title} />
+                    :<FilmsCardInfo  description={film.description} />
+            }
+
+            <div className="content mh-5" >
+                <a className="header">
+                    {film.title}
+                </a>
+                <div className="meta">
+                    <i className="icon users"/> {film.director}
+                    <span className="right floated">
+                <i className="icon wait right"/> {film.duration} min
+              </span>
+                </div>
+                <FilmDescriptionBtn id={film._id} eye={flagEye}/>
+            </div>
         </div>
-      </div>
-    </div>
-  )
-}
+    );
+};
 
 FilmCard.propTypes = {
-  film: PropTypes.shape({
     _id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
-    director: PropTypes.string.isRequired,
     description: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    director: PropTypes.string.isRequired,
     duration: PropTypes.number.isRequired,
     price: PropTypes.number.isRequired,
+    img: PropTypes.string.isRequired,
     featured: PropTypes.bool.isRequired,
-  }).isRequired,
-}
+    eye:PropTypes.bool
+};
 
-export default React.memo(FilmCard)
+FilmCard.defaultProps = {
+    _id: "",
+    description: " No description? So describe it. ",
+    title: " Name it ",
+    director: " Jora 007 ",
+    duration: 0,
+    price: 0,
+    img: "/img/sketchpad.jpg",
+    featured: false,
+    eye:true
+};
+
+
+export default React.memo(FilmCard);

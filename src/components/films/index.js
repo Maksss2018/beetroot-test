@@ -1,27 +1,17 @@
-import React from "react"
-import PropTypes from "prop-types"
-import FilmCard from "./FilmCard"
-import Message from "../Message"
+import React, {useContext} from 'react';
+import FilmCard from "./FilmCard";
+import {Context} from "../../Context";
 
-const FilmsList = ({films}) => {
-  return (
-    <div className="ui four cards">
-      {films.length === 0 ? (
-        <Message type="star outline" color="red">
-          Not yet films in our base
-        </Message>
-      ) : (
-        films.map(film => <FilmCard key={film._id} film={film} />)
-      )}
-    </div>
-  )
+
+function FilmList() {
+    const {films} = useContext(Context);
+    return (
+        <div className="ui four cards">
+            {films.map((item,ind)=>{
+                return(<FilmCard {...item} key={`${item._id}`} />)
+                })}
+        </div>
+    );
 }
 
-FilmsList.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.object).isRequired,
-}
-FilmsList.defaultProps = {
-  films: [],
-}
-
-export default FilmsList
+export default React.memo(FilmList);
