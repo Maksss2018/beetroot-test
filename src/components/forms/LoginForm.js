@@ -35,7 +35,7 @@ class LoginForm extends Component {
             let {  btn, ...allOther} = errors;
 
             Object.keys(data).map((item,ind)=>{
-                    store(item, data[item]);
+                store(item, data[item]);
                 return item
             });
 
@@ -60,17 +60,17 @@ class LoginForm extends Component {
                     this.setState({errors: {...this.state.errors,[name]:`your ${name} is not matching our conditions`}})
                 } else {
                     let { email,...errors } =this.state.errors;
-                        //{store,reqEmail}= this.context,
-                      //  flag = async () => await reqEmail(value);
+                    //{store,reqEmail}= this.context,
+                    //  flag = async () => await reqEmail(value);
                     /*
                      this.setState((flag()? {...errors}:{errors: {[name]:`your ${name} is not matching our conditions`}}));
 
                           if(errors[name]){ store(name,value)};
                     */
-                  /*
-                    flag()?store(name,value)
-                        :this.setState({errors: {...errors ,[name]:`There is no user with email like ${value}`}});
-                */
+                    /*
+                      flag()?store(name,value)
+                          :this.setState({errors: {...errors ,[name]:`There is no user with email like ${value}`}});
+                  */
                     store(name,value);
                     this.setState({errors: {...errors}});
                 };
