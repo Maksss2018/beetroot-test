@@ -1,0 +1,16 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "extends": [
+    "react-app",
+    "eslint-config-prettier"
+  ],
+  "rules": {
+    "valid-typeof": "error",
+    "no-console": "off"
+  },
+  "env": {
+    "browser": true
+  }
+}
