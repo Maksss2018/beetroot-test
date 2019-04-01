@@ -36,5 +36,5 @@
     "eslint-config-prettier": "^4.1.0",
     "prettier": "^1.16.4"
   },
-  "proxy": "http://localhost:8080"
+  "proxy": "http://localhost:8081"
 }

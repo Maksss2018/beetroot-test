@@ -4,7 +4,7 @@
   "description": "Bettroot academy JavaScript Advanced course",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development PORT=8080 nodemon --exec babel-node ./src/index.js",
+    "start": "cross-env NODE_ENV=development PORT=8081 nodemon --exec babel-node ./src/index.js",
     "build": "babel src --out-dir ./build"
   },
   "keywords": [

@@ -5,7 +5,7 @@ import FilmsList from "./films"
 import FilmForm from "./forms/FilmForm"
 import TopNavigation from "./TopNavigation"
 import api from "../api"
-import {FilmsContext} from " ../../context"
+import FilmsContext from "./../context"
 
 class App extends React.Component {
     static  ComponentContext = FilmsContext;
@@ -72,7 +72,7 @@ class App extends React.Component {
         const {items, showAddForm, selectedFilm} = this.state
         const cls = showAddForm ? "ten" : "sixteen"
         return (
-            < ComponentContext.Provider
+            <FilmsContext.Provider
         value = {
         {
             toggleFeatured: this.toggleFeatured,
@@ -85,38 +85,35 @@ class App extends React.Component {
         }
     }
     >
-    <
-        div
+                <div
         className = "ui container mt-3" >
-            < TopNavigation
+                    <TopNavigation
         showAddForm = {this.showAddForm}
         />
-        < div
+                    <div
         className = "ui stackable grid" >
             {showAddForm && (
-            < div
+                <div
         className = "six wide column" >
-            < FilmForm
+                    <FilmForm
         hideAddForm = {this.hideAddForm}
         submit = {this.saveFilm}
         film = {selectedFilm}
         />
-        < /div>
+                </div>
     )
     }
 
-    <
-        div
+                        <div
         className = {`${cls} wide column`
     }>
-    <
-        FilmsList
+                            <FilmsList
         films = {items}
         />
-        < /div>
-        < /div>
-        < /div>
-        < /ComponentContext.Provider>
+                        </div>
+                    </div>
+                </div>
+            </FilmsContext.Provider>
     )
     }
 }
