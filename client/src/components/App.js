@@ -15,7 +15,8 @@ class App extends React.Component {
     state = {
         items: [],
         selectedFilm: {},
-        loading: false
+        loading: false,
+        currentFilm: {}
     };
 
     componentDidMount() {
@@ -92,10 +93,14 @@ class App extends React.Component {
             items: this.sortFilms(items.filter(item => item._id !== film._id)),
         }))
     });
-    getFilm = film => api.films.getFilm(film).then(res => res);
+    getFilm = film => api.films.getFilm(film).then(res => {
+        this.setState(({currentFilm}) => ({
+            currentFilm: {...res}
+        }))
+    });
 
     render() {
-        const {items, showAddForm, selectedFilm, loading} = this.state;
+        const {items, showAddForm, selectedFilm, loading, currentFilm} = this.state;
         const cls = showAddForm ? "ten" : "sixteen";
         return (
             <FilmsContext.Provider
@@ -105,11 +110,11 @@ class App extends React.Component {
                         selectFilmForEdit: this.selectFilmForEdit,
                         deleteFilm: this.deleteFilm,
                         getFilm: this.getFilm,
+                        currentFilm: currentFilm
                     }
                 }
             >
                 <Router>
-
                     <div
                         className="ui container mt-3">
                         <TopNavigation

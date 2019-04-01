@@ -2,7 +2,7 @@ import axios from "axios"
 
 export default {
     films: {
-        getFilm: (_id) => axios.get(`/api/films/${_id}`).then(res => res),
+        getFilm: (_id) => axios.get(`/api/films/${_id}`).then(res => res.data.film),
         fetchAll: () => axios.get("/api/films").then(res => res.data.films),
         create: film => axios.post("/api/films", {film}).then(res => res.data.film),
         update: film =>
