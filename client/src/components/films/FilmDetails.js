@@ -2,24 +2,20 @@ import React, {useMemo, useEffect, useState, useContext} from 'react';
 import PropTypes from 'prop-types';
 import FilmsContext from "../../context"
 
-const getDetails = (_id) => {
-    const {getFilm, currentFilm} = useContext(FilmsContext);
-    let [id, setId] = useState(_id);
-    let [film, setFilm] = useState(currentFilm);
 
-    useEffect(() => {
-        document[`details-${id}`] = getFilm(id);
-    }, [id]);
-};
-
-const FilmDetails = ({match}) => {
-    const {currentFilm} = useContext(FilmsContext);
-    getDetails(match.params.id);
+const FilmDetails = ({currentFilm, match}) => {
+    let {getFilm} = useContext(FilmsContext);
+    let [state, setState] = useState(match.params);
+    getFilm(state.id);
     return (
-        <span>
-         <h4> Films Details </h4>
+        <div>
+            <h4> Films Details : {match.params.title} </h4>
             {JSON.stringify(currentFilm)}
-        </span>
+            <ul> {Object.keys(state).map((item, ind) => <li key={`${item}-${ind}`}>
+                {item} : {state[item]}
+            </li>)}
+            </ul>
+        </div>
     );
 };
 

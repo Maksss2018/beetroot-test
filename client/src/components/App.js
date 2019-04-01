@@ -152,7 +152,10 @@ class App extends React.Component {
                                 </div>
                             </div>}/>
 
-                            <Route path="/film_details/:id" component={FilmDetails}/>
+                            <Route
+                                path="/film_details/:id-:title-:img"
+                                render={(props) => <FilmDetails  {...props}/>}
+                            />
 
                         </>}
                     </div>
