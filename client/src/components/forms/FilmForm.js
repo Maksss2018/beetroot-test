@@ -1,6 +1,7 @@
 import React from "react"
 import ReactImageFallback from "react-image-fallback"
 import FormMessage from "./FormMessage"
+import {BrowserRouter as Router, Route, NavLink} from "react-router-dom"
 
 const initialData = {
     _id: null,
@@ -91,188 +92,188 @@ class FilmForm extends React.Component {
         const {data, errors, loading} = this.state;
         return (
             <form
-        className = {loading ? "ui form loading" : "ui form"}
-        onSubmit = {this.handleSubmit}
+                className={loading ? "ui form loading" : "ui form"}
+                onSubmit={this.handleSubmit}
             >
                 <div
-        className = "ui  grid" >
+                    className="ui  grid">
                     <div
-        className = "twelve wide column" >
-            {/* title */}
+                        className="twelve wide column">
+                        {/* title */}
                         <div
-        className = {errors.title ? "field error" : "field"} >
+                            className={errors.title ? "field error" : "field"}>
                             <label> Film
                                 title </label>
                             <input
-        type = "text"
-        name = "title"
-        id = "name"
-        placeholder = "film title"
-        value = {data.title}
-        onChange = {this.handleStringChange}
-        />
+                                type="text"
+                                name="title"
+                                id="name"
+                                placeholder="film title"
+                                value={data.title}
+                                onChange={this.handleStringChange}
+                            />
                             <FormMessage> {errors.title || []} </FormMessage>
                         </div>
 
-        {/* Description */
-        }
-    <
-        div
-        className = {errors.description ? "error field" : "field"} >
-        <label> Film
-            description </label>
-        <textarea
-        name = "description"
-        id = "description"
-        placeholder = "film description"
-        value = {data.description}
-        onChange = {this.handleStringChange}
-        />
-        <FormMessage> {errors.description} </FormMessage>
-    </div>
-        {/* twelve wide column */
-        }
+                        {/* Description */
+                        }
+                        <
+                            div
+                            className={errors.description ? "error field" : "field"}>
+                            <label> Film
+                                description </label>
+                            <textarea
+                                name="description"
+                                id="description"
+                                placeholder="film description"
+                                value={data.description}
+                                onChange={this.handleStringChange}
+                            />
+                            <FormMessage> {errors.description} </FormMessage>
+                        </div>
+                        {/* twelve wide column */
+                        }
                     </div>
 
-        {/*  image box  */
-        }
+                    {/*  image box  */
+                    }
                     <div
-        className = "four wide column" >
+                        className="four wide column">
                         <ReactImageFallback
-        src = {data.img}
-        fallbackImage = "http://via.placeholder.com/250x250"
-        alt = {data.title}
-        className = "ui image"
+                            src={data.img}
+                            fallbackImage="http://via.placeholder.com/250x250"
+                            alt={data.title}
+                            className="ui image"
                         />
                     </div>
 
                     <div
-        className = "twelve wide column" >
+                        className="twelve wide column">
                         <div
-        className = {errors.img ? "error field" : "field"} >
+                            className={errors.img ? "error field" : "field"}>
                             <label> Image </label>
                             <input
-        type = "text"
-        name = "img"
-        id = "img"
-        placeholder = "img"
-        value = {data.img}
-        onChange = {this.handleStringChange}
-        />
+                                type="text"
+                                name="img"
+                                id="img"
+                                placeholder="img"
+                                value={data.img}
+                                onChange={this.handleStringChange}
+                            />
                             <FormMessage> {errors.img} </FormMessage>
                         </div>
                     </div>
-        {/* END  image box  */
-        }
+                    {/* END  image box  */
+                    }
 
-        {/*  Director  */
-        }
+                    {/*  Director  */
+                    }
                     <div
-        className = "six wide column field" >
+                        className="six wide column field">
                         <div
-        className = {errors.director ? "error field" : "field"} >
+                            className={errors.director ? "error field" : "field"}>
                             <label> Director </label>
                             <input
-        type = "text"
-        name = "director"
-        id = "director"
-        placeholder = "film director"
-        value = {data.director}
-        onChange = {this.handleStringChange}
-        />
+                                type="text"
+                                name="director"
+                                id="director"
+                                placeholder="film director"
+                                value={data.director}
+                                onChange={this.handleStringChange}
+                            />
                             <FormMessage> {errors.director} </FormMessage>
                         </div>
                     </div>
-        {/*  END Director  */
-        }
+                    {/*  END Director  */
+                    }
 
-        {/* Duration */
-        }
+                    {/* Duration */
+                    }
                     <div
-        className = "six wide column" >
+                        className="six wide column">
                         <div
-        className = {errors.duration ? "error field" : "field"} >
+                            className={errors.duration ? "error field" : "field"}>
                             <label> Duration </label>
                             <input
-        type = "number"
-        name = "duration"
-        min = "1"
-        step = "1"
-        id = "duration"
-        placeholder = "Duration"
-        value = {data.duration}
-        onChange = {this.handleNumberChange}
-        />
+                                type="number"
+                                name="duration"
+                                min="1"
+                                step="1"
+                                id="duration"
+                                placeholder="Duration"
+                                value={data.duration}
+                                onChange={this.handleNumberChange}
+                            />
                             <FormMessage> {errors.duration} </FormMessage>
                         </div>
                     </div>
-        {/* END Duration */
-        }
+                    {/* END Duration */
+                    }
 
-        {/*  Price */
-        }
+                    {/*  Price */
+                    }
                     <div
-        className = "six wide column" >
+                        className="six wide column">
                         <div
-        className = {errors.price ? "error field" : "field"} >
+                            className={errors.price ? "error field" : "field"}>
                             <label> Price </label>
                             <input
-        type = "number"
-        name = "price"
-        min = "1"
-        step = "0.1"
-        id = "price"
-        placeholder = "price"
-        value = {data.price}
-        onChange = {this.handleNumberChange}
-        />
+                                type="number"
+                                name="price"
+                                min="1"
+                                step="0.1"
+                                id="price"
+                                placeholder="price"
+                                value={data.price}
+                                onChange={this.handleNumberChange}
+                            />
                             <FormMessage> {errors.price} </FormMessage>
                         </div>
                     </div>
-        {/*  END Price */
-        }
+                    {/*  END Price */
+                    }
 
-        {/* Featured */
-        }
+                    {/* Featured */
+                    }
                     <div
-        className = "six wide column inline field" >
+                        className="six wide column inline field">
                         <label
                             htmlFor="featured"> Featured </label>
                         <input
-        type = "checkbox"
-        name = "featured"
-        id = "featured"
-        value = {data.featured}
-        onChange = {this.handleCheckboxChange}
-        />
+                            type="checkbox"
+                            name="featured"
+                            id="featured"
+                            value={data.featured}
+                            onChange={this.handleCheckboxChange}
+                        />
                     </div>
-        {/* END Featured */
-        }
+                    {/* END Featured */
+                    }
                 </div>
-        {/* END ui grid */
-        }
+                {/* END ui grid */
+                }
 
-        {/* Buttons  */
-        }
+                {/* Buttons  */
+                }
                 <div
-        className = "ui fluid buttons" >
+                    className="ui fluid buttons">
                     <button
-        className = "ui button primary"
-        type = "submit" >
-            Save
+                        className="ui button primary"
+                        type="submit">
+                        Save
                     </button>
                     <div
                         className="or"/>
-                    <span
-                        href="#"
+                    <NavLink
+                        to="/"
                         className="ui button"
-                        onClick={this.props.hideAddForm}>
-            Hide
-        form
-        </span>
+                    >
+                        Hide
+                        form
+                    </NavLink>
                 </div>
             </form>
-    )
+        )
     }
 }
 

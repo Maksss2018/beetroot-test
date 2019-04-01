@@ -1,8 +1,9 @@
 import React, {useState, useContext} from "react"
 import PropTypes from "prop-types"
 import Featured from "./Featured"
-import FilmDetails from "./FilmDetails"
 import FilmsContext from "../../context"
+import {BrowserRouter as Router, Route, NavLink} from "react-router-dom"
+
 
 const FilmCard = ({film}) => {
     const {selectFilmForEdit, deleteFilm} = useContext(FilmsContext);
@@ -34,16 +35,15 @@ const FilmCard = ({film}) => {
                     src={film.img}
                     alt={film.title}
                 />
-                <FilmDetails id={film._id}/>
             </div>
 
             <div
                 className="content">
-        <span
-            href="#"
+                <NavLink
+                    to={`/film_details/${film._id}`}
             className="header">
         {film.title}
-            </span>
+                </NavLink>
                 <div
                     className="meta">
                     <i

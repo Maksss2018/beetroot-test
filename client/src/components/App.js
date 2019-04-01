@@ -4,24 +4,50 @@ import _find from "lodash/find"
 import FilmsList from "./films"
 import FilmForm from "./forms/FilmForm"
 import TopNavigation from "./TopNavigation"
+import FilmDetails from "./films/FilmDetails"
+import Loader from "./Loader"
 import api from "../api"
 import FilmsContext from "./../context"
+import {BrowserRouter as Router, Route, Link} from "react-router-dom"
 
 class App extends React.Component {
     static  ComponentContext = FilmsContext;
     state = {
         items: [],
-        showAddForm: false,
         selectedFilm: {},
+        loading: false
     };
 
     componentDidMount() {
-        api.films.fetchAll().then(films =>
-            this.setState({
-                items: this.sortFilms(films),
-            }),
-        )
+        this.setState({
+            loading: true
+        });
+        setTimeout(() => {
+            api.films.fetchAll().then(films =>
+                this.setState({
+                    items: this.sortFilms(films),
+                    loading: false
+                }),
+            )
+
+        }, 2000);
     }
+
+    /*  ASYNC  way
+    async componentDidMount() {
+        this.setState({
+            loading: true
+        });
+          await  api.films.fetchAll().then(films =>
+                this.setState({
+                    items: this.sortFilms(films),
+                    loading: false
+                }),
+            )
+    }
+
+    */
+
 
     sortFilms = films => _orderBy(films, ["featured", "title"], ["desc", "asc"]);
 
@@ -66,10 +92,10 @@ class App extends React.Component {
             items: this.sortFilms(items.filter(item => item._id !== film._id)),
         }))
     });
-
+    getFilm = film => api.films.getFilm(film).then(res => res);
 
     render() {
-        const {items, showAddForm, selectedFilm} = this.state;
+        const {items, showAddForm, selectedFilm, loading} = this.state;
         const cls = showAddForm ? "ten" : "sixteen";
         return (
             <FilmsContext.Provider
@@ -78,37 +104,55 @@ class App extends React.Component {
                         toggleFeatured: this.toggleFeatured,
                         selectFilmForEdit: this.selectFilmForEdit,
                         deleteFilm: this.deleteFilm,
+                        getFilm: this.getFilm,
                     }
                 }
             >
-                <div
-                    className="ui container mt-3">
-                    <TopNavigation
-                        showAddForm={this.showAddForm}
-                    />
-                    <div
-                        className="ui stackable grid">
-                        {showAddForm && (
-                            <div
-                                className="six wide column">
-                                <FilmForm
-                                    hideAddForm={this.hideAddForm}
-                                    submit={this.saveFilm}
-                                    film={selectedFilm}
-                                />
-                            </div>
-                        )
-                        }
+                <Router>
 
-                        <div
-                            className={`${cls} wide column`
-                            }>
-                            <FilmsList
-                                films={items}
-                            />
-                        </div>
+                    <div
+                        className="ui container mt-3">
+                        <TopNavigation
+                            showAddForm={this.showAddForm}
+                        />
+                        {loading ? <Loader/> : <>
+                            <Route path="/form" render={(props) => <div
+                                className="ui stackable grid">
+                                <div
+                                    className="six wide column">
+                                    <FilmForm
+                                        hideAddForm={this.hideAddForm}
+                                        submit={this.saveFilm}
+                                        film={selectedFilm}
+                                    />
+                                </div>
+
+                                <div
+                                    className={`ten wide column`
+                                    }>
+                                    <FilmsList
+                                        films={items}
+                                    />
+                                </div>
+                            </div>}/>
+
+                            <Route exact path="/" render={(props) => <div
+                                className="ui stackable grid">
+                                <div
+                                    className={`sixteen wide column`
+                                    }>
+                                    <FilmsList
+                                        films={items}
+                                    />
+                                </div>
+                            </div>}/>
+
+                            <Route path="/film_details/:id" component={FilmDetails}/>
+
+                        </>}
                     </div>
-                </div>
+
+                </Router>
             </FilmsContext.Provider>
         )
     }
