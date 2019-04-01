@@ -5,14 +5,17 @@ import FilmsContext from "../../context"
 
 const FilmDetails = ({currentFilm, match}) => {
     let {getFilm} = useContext(FilmsContext);
-    let [state, setState] = useState(match.params);
-    getFilm(state.id);
+    let [film, setFilm] = useState({});
+    useEffect(() => {
+        getFilm(match.params.id);
+        setFilm(currentFilm);
+    }, [match.params.id]);
+
     return (
         <div>
             <h4> Films Details : {match.params.title} </h4>
-            {JSON.stringify(currentFilm)}
-            <ul> {Object.keys(state).map((item, ind) => <li key={`${item}-${ind}`}>
-                {item} : {state[item]}
+            <ul> {Object.keys(film).map((item, ind) => <li key={`${item}-${ind}`}>
+                {item} : {film[item]}
             </li>)}
             </ul>
         </div>

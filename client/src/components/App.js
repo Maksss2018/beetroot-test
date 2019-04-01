@@ -109,8 +109,7 @@ class App extends React.Component {
                         toggleFeatured: this.toggleFeatured,
                         selectFilmForEdit: this.selectFilmForEdit,
                         deleteFilm: this.deleteFilm,
-                        getFilm: this.getFilm,
-                        currentFilm: currentFilm
+                        getFilm: this.getFilm
                     }
                 }
             >
@@ -153,8 +152,8 @@ class App extends React.Component {
                             </div>}/>
 
                             <Route
-                                path="/film_details/:id-:title-:img"
-                                render={(props) => <FilmDetails  {...props}/>}
+                                path="/film_details/:id-:title"
+                                render={(props) => <FilmDetails currentFilm={currentFilm}  {...props}/>}
                             />
 
                         </>}

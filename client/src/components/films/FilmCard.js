@@ -40,7 +40,7 @@ const FilmCard = ({film}) => {
             <div
                 className="content">
                 <NavLink
-                    to={`/film_details/${film._id}-${film.title}-${film.img}`}
+                    to={`/film_details/${film._id}-${film.title}`}
                     className="header">
         {film.title}
                 </NavLink>
