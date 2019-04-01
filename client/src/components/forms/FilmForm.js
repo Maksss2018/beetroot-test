@@ -11,14 +11,14 @@ const initialData = {
     price: "",
     img: "",
     featured: false,
-}
+};
 
 class FilmForm extends React.Component {
     state = {
         data: initialData,
         errors: {},
         loading: false,
-    }
+    };
 
     componentDidMount() {
         if (this.props.film._id) {
@@ -27,8 +27,8 @@ class FilmForm extends React.Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        const {film} = props
-        const {data} = state
+        const {film} = props;
+        const {data} = state;
 
         if (film._id && film._id !== data._id) {
             return {...state, data: film}
@@ -39,70 +39,71 @@ class FilmForm extends React.Component {
         return null
     }
 
-    validate(data) {
-        const errors = {}
-        if (!data.title) errors.title = "Title cannot be blank"
-        if (!data.description) errors.description = "description cannot be blank"
-        if (!data.img) errors.img = "img cannot be blank"
-        if (!data.director) errors.director = "director cannot be blank"
-        if (!data.duration) errors.duration = "duration cannot be blank"
-        if (!data.price) errors.price = "price cannot be blank"
+    validate(data = {}) {
+        const errors = {};
+        if (!data.title) errors.title = "Title cannot be blank";
+        if (!data.description) errors.description = "description cannot be blank";
+        if (!data.img) errors.img = "img cannot be blank";
+        if (!data.director) errors.director = "director cannot be blank";
+        if (!data.duration) errors.duration = "duration cannot be blank";
+        if (!data.price) errors.price = "price cannot be blank";
 
         if (parseFloat(data.duration <= 0))
-            errors.duratino = "duration must be positive value"
+            errors.duratino = "duration must be positive value";
         if (parseFloat(data.price <= 0))
-            errors.price = "price must be positive value"
+            errors.price = "price must be positive value";
         return errors
     }
 
     handleSubmit = e => {
-        e.preventDefault()
-        const errors = this.validate(this.state.data)
-        this.setState({errors})
+        e.preventDefault();
+        const errors = this.validate(this.state.data);
+        this.setState({errors});
         if (Object.keys(errors).length === 0) {
-            this.setState({loading: true})
+            this.setState({loading: true});
             this.props
                 .submit(this.state.data)
                 .catch(err =>
                     this.setState({errors: err.response.data.errors, loading: false}),
                 )
         }
-    }
+    };
 
     handleStringChange = e =>
         this.setState({
             data: {...this.state.data, [e.target.name]: e.target.value},
             errors: {...this.state.errors, [e.target.name]: ""},
-        })
+        });
 
     handleNumberChange = e =>
         this.setState({
             data: {...this.state.data, [e.target.name]: parseFloat(e.target.value)},
             errors: {...this.state.errors, [e.target.name]: ""},
-        })
+        });
 
     handleCheckboxChange = e =>
         this.setState({
             data: {...this.state.data, [e.target.name]: e.target.checked},
-        })
+        });
+
 
     render() {
-        const {data, errors, loading} = this.state
+        const {data, errors, loading} = this.state;
         return (
-            < form
+            <form
         className = {loading ? "ui form loading" : "ui form"}
         onSubmit = {this.handleSubmit}
             >
-            < div
+                <div
         className = "ui  grid" >
-            < div
+                    <div
         className = "twelve wide column" >
             {/* title */}
-            < div
+                        <div
         className = {errors.title ? "field error" : "field"} >
-            < label > Film
-        title < /label>
-        < input
+                            <label> Film
+                                title </label>
+                            <input
         type = "text"
         name = "title"
         id = "name"
@@ -110,49 +111,47 @@ class FilmForm extends React.Component {
         value = {data.title}
         onChange = {this.handleStringChange}
         />
-        < FormMessage > {errors.title} < /FormMessage>
-        < /div>
+                            <FormMessage> {errors.title || []} </FormMessage>
+                        </div>
 
         {/* Description */
         }
     <
         div
         className = {errors.description ? "error field" : "field"} >
-            < label > Film
-        description < /label>
-        < textarea
+        <label> Film
+            description </label>
+        <textarea
         name = "description"
         id = "description"
         placeholder = "film description"
         value = {data.description}
         onChange = {this.handleStringChange}
         />
-        < FormMessage > {errors.description} < /FormMessage>
-        < /div>
+        <FormMessage> {errors.description} </FormMessage>
+    </div>
         {/* twelve wide column */
         }
-    <
-        /div>
+                    </div>
 
         {/*  image box  */
         }
-    <
-        div
+                    <div
         className = "four wide column" >
-            < ReactImageFallback
+                        <ReactImageFallback
         src = {data.img}
         fallbackImage = "http://via.placeholder.com/250x250"
         alt = {data.title}
         className = "ui image"
-            / >
-            < /div>
+                        />
+                    </div>
 
-            < div
+                    <div
         className = "twelve wide column" >
-            < div
+                        <div
         className = {errors.img ? "error field" : "field"} >
-            < label > Image < /label>
-            < input
+                            <label> Image </label>
+                            <input
         type = "text"
         name = "img"
         id = "img"
@@ -160,21 +159,20 @@ class FilmForm extends React.Component {
         value = {data.img}
         onChange = {this.handleStringChange}
         />
-        < FormMessage > {errors.img} < /FormMessage>
-        < /div>
-        < /div>
+                            <FormMessage> {errors.img} </FormMessage>
+                        </div>
+                    </div>
         {/* END  image box  */
         }
 
         {/*  Director  */
         }
-    <
-        div
+                    <div
         className = "six wide column field" >
-            < div
+                        <div
         className = {errors.director ? "error field" : "field"} >
-            < label > Director < /label>
-            < input
+                            <label> Director </label>
+                            <input
         type = "text"
         name = "director"
         id = "director"
@@ -182,21 +180,20 @@ class FilmForm extends React.Component {
         value = {data.director}
         onChange = {this.handleStringChange}
         />
-        < FormMessage > {errors.director} < /FormMessage>
-        < /div>
-        < /div>
+                            <FormMessage> {errors.director} </FormMessage>
+                        </div>
+                    </div>
         {/*  END Director  */
         }
 
         {/* Duration */
         }
-    <
-        div
+                    <div
         className = "six wide column" >
-            < div
+                        <div
         className = {errors.duration ? "error field" : "field"} >
-            < label > Duration < /label>
-            < input
+                            <label> Duration </label>
+                            <input
         type = "number"
         name = "duration"
         min = "1"
@@ -206,21 +203,20 @@ class FilmForm extends React.Component {
         value = {data.duration}
         onChange = {this.handleNumberChange}
         />
-        < FormMessage > {errors.duration} < /FormMessage>
-        < /div>
-        < /div>
+                            <FormMessage> {errors.duration} </FormMessage>
+                        </div>
+                    </div>
         {/* END Duration */
         }
 
         {/*  Price */
         }
-    <
-        div
+                    <div
         className = "six wide column" >
-            < div
+                        <div
         className = {errors.price ? "error field" : "field"} >
-            < label > Price < /label>
-            < input
+                            <label> Price </label>
+                            <input
         type = "number"
         name = "price"
         min = "1"
@@ -230,55 +226,52 @@ class FilmForm extends React.Component {
         value = {data.price}
         onChange = {this.handleNumberChange}
         />
-        < FormMessage > {errors.price} < /FormMessage>
-        < /div>
-        < /div>
+                            <FormMessage> {errors.price} </FormMessage>
+                        </div>
+                    </div>
         {/*  END Price */
         }
 
         {/* Featured */
         }
-    <
-        div
+                    <div
         className = "six wide column inline field" >
-            < label
-        htmlFor = "featured" > Featured < /label>
-            < input
+                        <label
+                            htmlFor="featured"> Featured </label>
+                        <input
         type = "checkbox"
         name = "featured"
         id = "featured"
         value = {data.featured}
         onChange = {this.handleCheckboxChange}
         />
-        < /div>
+                    </div>
         {/* END Featured */
         }
-    <
-        /div>
+                </div>
         {/* END ui grid */
         }
 
         {/* Buttons  */
         }
-    <
-        div
+                <div
         className = "ui fluid buttons" >
-            < button
+                    <button
         className = "ui button primary"
         type = "submit" >
             Save
-            < /button>
-            < div
-        className = "or" / >
-            < span
-        href = "#"
-        className = "ui button"
-        onClick = {this.props.hideAddForm} >
+                    </button>
+                    <div
+                        className="or"/>
+                    <span
+                        href="#"
+                        className="ui button"
+                        onClick={this.props.hideAddForm}>
             Hide
         form
-        < /span>
-        < /div>
-        < /form>
+        </span>
+                </div>
+            </form>
     )
     }
 }

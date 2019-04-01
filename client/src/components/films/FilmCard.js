@@ -1,6 +1,7 @@
 import React, {useState, useContext} from "react"
 import PropTypes from "prop-types"
 import Featured from "./Featured"
+import FilmDetails from "./FilmDetails"
 import FilmsContext from "../../context"
 
 const FilmCard = ({film}) => {
@@ -33,6 +34,7 @@ const FilmCard = ({film}) => {
                     src={film.img}
                     alt={film.title}
                 />
+                <FilmDetails id={film._id}/>
             </div>
 
             <div

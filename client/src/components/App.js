@@ -23,15 +23,15 @@ class App extends React.Component {
         )
     }
 
-    sortFilms = films => _orderBy(films, ["featured", "title"], ["desc", "asc"])
+    sortFilms = films => _orderBy(films, ["featured", "title"], ["desc", "asc"]);
 
     toggleFeatured = id => {
-        const film = _find(this.state.items, {_id: id})
+        const film = _find(this.state.items, {_id: id});
         return this.updateFilm({...film, featured: !film.featured})
-    }
+    };
 
     saveFilm = film =>
-        film._id === null ? this.addFilm(film) : this.updateFilm(film)
+        film._id === null ? this.addFilm(film) : this.updateFilm(film);
 
     addFilm = filmData =>
         api.films.create(filmData).then(film =>
@@ -39,7 +39,7 @@ class App extends React.Component {
                 items: this.sortFilms([...items, film]),
                 showAddForm: false,
             })),
-        )
+        );
 
     updateFilm = filmData =>
         api.films.update(filmData).then(film =>
@@ -51,15 +51,15 @@ class App extends React.Component {
             })),
         );
 
-    showAddForm = () => this.setState({showAddForm: true, selectedFilm: {}})
+    showAddForm = () => this.setState({showAddForm: true, selectedFilm: {}});
 
-    hideAddForm = () => this.setState({showAddForm: false, selectedFilm: {}})
+    hideAddForm = () => this.setState({showAddForm: false, selectedFilm: {}});
 
     selectFilmForEdit = selectedFilm =>
         this.setState({
             selectedFilm,
             showAddForm: true,
-        })
+        });
 
     deleteFilm = film => api.films.delete(film).then(res => {
         this.setState(({items}) => ({
@@ -69,52 +69,48 @@ class App extends React.Component {
 
 
     render() {
-        const {items, showAddForm, selectedFilm} = this.state
-        const cls = showAddForm ? "ten" : "sixteen"
+        const {items, showAddForm, selectedFilm} = this.state;
+        const cls = showAddForm ? "ten" : "sixteen";
         return (
             <FilmsContext.Provider
-        value = {
-        {
-            toggleFeatured: this.toggleFeatured,
-                selectFilmForEdit
-        :
-            this.selectFilmForEdit,
-                deleteFilm
-        :
-            this.deleteFilm,
-        }
-    }
-    >
+                value={
+                    {
+                        toggleFeatured: this.toggleFeatured,
+                        selectFilmForEdit: this.selectFilmForEdit,
+                        deleteFilm: this.deleteFilm,
+                    }
+                }
+            >
                 <div
-        className = "ui container mt-3" >
+                    className="ui container mt-3">
                     <TopNavigation
-        showAddForm = {this.showAddForm}
-        />
+                        showAddForm={this.showAddForm}
+                    />
                     <div
-        className = "ui stackable grid" >
-            {showAddForm && (
-                <div
-        className = "six wide column" >
-                    <FilmForm
-        hideAddForm = {this.hideAddForm}
-        submit = {this.saveFilm}
-        film = {selectedFilm}
-        />
-                </div>
-    )
-    }
+                        className="ui stackable grid">
+                        {showAddForm && (
+                            <div
+                                className="six wide column">
+                                <FilmForm
+                                    hideAddForm={this.hideAddForm}
+                                    submit={this.saveFilm}
+                                    film={selectedFilm}
+                                />
+                            </div>
+                        )
+                        }
 
                         <div
-        className = {`${cls} wide column`
-    }>
+                            className={`${cls} wide column`
+                            }>
                             <FilmsList
-        films = {items}
-        />
+                                films={items}
+                            />
                         </div>
                     </div>
                 </div>
             </FilmsContext.Provider>
-    )
+        )
     }
 }
 
