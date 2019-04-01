@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use("/api/users", users);
 app.use("/api/auth", auth);
 app.use("/api/films", films);
-//app.use("/api/authfilms", authfilms);
+app.use("/api/authfilms", authfilms);
 
 const port = process.env.PORT || 9000;
 const mongoUrl = `${process.env.DB_CONNECTION}`;
