@@ -23,7 +23,9 @@ router.post('/', (req, res) => {
                         role: doc.role
                     }
                 }, process.env.JWT_SECRET);
+
                 res.json({token});
+                //  res.json({token,role:doc.role});
             } else {
                 res.status(401).json({errors: {global: 'Invalid credentials '}});
             }
@@ -32,5 +34,6 @@ router.post('/', (req, res) => {
         }
     });
 });
+
 
 export default router;
