@@ -1,10 +1,7 @@
 import React from "react"
 import {NavLink} from "react-router-dom"
-/* TODO:
-  *  Make request to check admin Password or Token if true return here
-  *  flag to open extra options
-  *  */
-const TopNavigation = ({isAuth, logout, checkToken}) => (
+
+const TopNavigation = ({isAuth, logout}) => (
     <div className="ui secondary pointing menu">
         <NavLink exact to="/" className="item">
             Home
@@ -37,6 +34,6 @@ const TopNavigation = ({isAuth, logout, checkToken}) => (
             </div>
         )}
     </div>
-)
+);
 
 export default TopNavigation

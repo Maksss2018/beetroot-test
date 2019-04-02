@@ -11,7 +11,10 @@ package-lock.json
 /node_modules
 /server/node_modules
 /client/node_modules
-
+/client/*.zip
+/client/src_
+/client/src(2)
+/lessons_4
 /.pnp
 .pnp.js
 
