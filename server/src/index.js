@@ -8,7 +8,7 @@ import users from "./routes/users";
 import auth from "./routes/auth";
 import films from "./routes/films";
 import authfilms from "./routes/authfilms";
-import uncript from "./routes/uncript";
+import decript from "./routes/decript";
 
 
 const app = express();
@@ -26,7 +26,7 @@ app.use("/api/users", users);
 app.use("/api/auth", auth);
 app.use("/api/films", films);
 app.use("/api/authfilms", authfilms);
-app.use("/api/uncript", uncript);
+app.use("/api/decript", decript);
 
 const port = process.env.PORT || 9000;
 const mongoUrl = `${process.env.DB_CONNECTION}`;

@@ -1,7 +1,7 @@
 import React from "react"
 import {NavLink} from "react-router-dom"
 
-const TopNavigation = ({isAuth, logout}) => (
+const TopNavigation = ({isAuth, logout, role}) => (
     <div className="ui secondary pointing menu">
         <NavLink exact to="/" className="item">
             Home
@@ -9,14 +9,11 @@ const TopNavigation = ({isAuth, logout}) => (
         <NavLink exact to="/films" className="item">
             Films
         </NavLink>
-        <NavLink exact to="/list" className="item">
-            User`s List
-        </NavLink>
-
-        <NavLink exact to="/films/new" className="item">
+        {role == "visitor" ? ""
+            : <NavLink exact to="/films/new" className="item">
             <i className="icon plus"/>
             Add new film
-        </NavLink>
+            </NavLink>}
         {isAuth.length !== 0 ? (
             <div className="right menu">
         <span onClick={logout} className="item">

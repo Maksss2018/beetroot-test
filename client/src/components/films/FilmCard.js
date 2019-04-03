@@ -5,19 +5,43 @@ import Featured from "./Featured"
 import {FilmsContext} from "../../context"
 
 const FilmCard = ({film}) => {
-    const {deleteFilm} = useContext(FilmsContext)
-    const [confirm, setConfirm] = useState(false)
-    const showConfirm = () => setConfirm(true)
-    const hideConfirm = () => setConfirm(false)
+    let {deleteFilm, role} = useContext(FilmsContext);
+    const [confirm, setConfirm] = useState(false),
+        showConfirm = () => setConfirm(true),
+        hideConfirm = () => setConfirm(false);
+    let notVisitor = <div className="extra content">
+        {confirm ? (
+            <div className="ui two buttons">
+            <span
+                className="ui red basic button"
+                onClick={() => deleteFilm(film)}
+            >
+              <i className="ui icon check"/> YES
+            </span>
+                <span className="ui grey basic button" onClick={hideConfirm}>
+              <i className="ui icon close"/> NO
+            </span>
+            </div>
+        ) : (
+            <div className="ui two buttons">
+                <Link
+                    to={`/films/edit/${film._id}`}
+                    className="ui green basic button"
+                >
+                    <i className="ui icon edit"/>
+                </Link>
+                <span className="ui red basic button" onClick={showConfirm}>
+              <i className="ui icon trash"/>
+            </span>
+            </div>
+        )}
+    </div>;
 
     return (
         <div className="ui card">
-      <span className="ui right corner label">
-        <i className="empty star icon"/>
-      </span>
             <div className="image">
                 <span className="ui green label ribbon">$ {film.price} </span>
-                <Featured featured={film.featured} id={film._id}/>
+                {role == "visitor" ? "" : <Featured featured={film.featured} id={film._id}/>}
                 <img src={film.img} alt={film.title}/>
             </div>
 
@@ -33,34 +57,8 @@ const FilmCard = ({film}) => {
           </span>
                 </div>
             </div>
+            {role == "visitor" ? "" : notVisitor}
 
-            <div className="extra content">
-                {confirm ? (
-                    <div className="ui two buttons">
-            <span
-                className="ui red basic button"
-                onClick={() => deleteFilm(film)}
-            >
-              <i className="ui icon check"/> YES
-            </span>
-                        <span className="ui grey basic button" onClick={hideConfirm}>
-              <i className="ui icon close"/> NO
-            </span>
-                    </div>
-                ) : (
-                    <div className="ui two buttons">
-                        <Link
-                            to={`/films/edit/${film._id}`}
-                            className="ui green basic button"
-                        >
-                            <i className="ui icon edit"/>
-                        </Link>
-                        <span className="ui red basic button" onClick={showConfirm}>
-              <i className="ui icon trash"/>
-            </span>
-                    </div>
-                )}
-            </div>
         </div>
     )
 }

@@ -32,10 +32,13 @@ class App extends React.Component {
     });
     render() {
         const {message} = this.state;
+        let {email, token, role} = this.state.user;
+
         return (
             <div className="ui container mt-3">
                 <TopNavigation
-                    isAuth={this.state.user.token || ""}
+                    role={role}
+                    isAuth={token || ""}
                     logout={this.logout}
                 />
                 {message && (
@@ -45,9 +48,11 @@ class App extends React.Component {
                     </div>
                 )}
                 <Route exact path="/" render={props => <HomePage
-                    role={this.state.user.role}
-                    user={this.state.user.email}/>}/>
-                <Route path="/films" component={FilmsPage}/>
+                    {...props}
+                    role={role}
+                    user={email}
+                />}/>
+                <Route path="/films" render={(props) => <FilmsPage {...props} role={role}/>}/>
                 <Route
                     path="/signup"
                     render={props => (
