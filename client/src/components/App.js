@@ -35,15 +35,18 @@ class App extends React.Component {
         return (
             <div className="ui container mt-3">
                 <TopNavigation
-                    isAuth={this.state.user.token}
-                    logout={this.logout}/>
+                    isAuth={this.state.user.token || ""}
+                    logout={this.logout}
+                />
                 {message && (
                     <div className="ui info message">
                         <i onClick={() => this.setMessage("")} className="close icon"/>
                         {message}
                     </div>
                 )}
-                <Route exact path="/" component={HomePage}/>
+                <Route exact path="/" render={props => <HomePage
+                    role={this.state.user.role}
+                    user={this.state.user.email}/>}/>
                 <Route path="/films" component={FilmsPage}/>
                 <Route
                     path="/signup"
@@ -56,6 +59,7 @@ class App extends React.Component {
                 <Route path="/login" render={props => <LoginPage
                     {...props}
                     login={this.login}
+                    role={this.checkRole}
                 />
                 }/>
             </div>

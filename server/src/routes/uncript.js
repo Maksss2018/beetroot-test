@@ -15,7 +15,8 @@ router.post("/", (req, res, next) => {
             res.status(500).json({errors: {global: err}});
         }
         let {iat, _id, ...user} = userData;
-        res.status(200).json({user, token});
+
+        res.status(200).json({...user, token});
         /*
         db.collection('users').findOne({_id}, (err, doc) => {
             if (err) {

@@ -29,10 +29,9 @@ class LoginForm extends React.Component {
         if (Object.keys(errors).length === 0) {
             this.setState({loading: true});
             this.props.login({...data}).then(() => {
-                this.props.history.push("/films");
+                this.props.history.push("/");
             }).catch(error => {
                 let err = {};
-                console.dir(error);
                 this.setState({
                     loading: false
                 });
@@ -43,6 +42,8 @@ class LoginForm extends React.Component {
 
                 this.setState({errors})
             });
+            setTimeout(() => this.props
+                .role(localStorage.getItem("token")), 500);
         }
     };
 
