@@ -5,67 +5,45 @@ import FormMessage from "./FormMessage"
 const initialData = {
     email: "",
     password: "",
-};
+}
 
 class LoginForm extends React.Component {
     state = {
         data: initialData,
         errors: {},
         loading: false,
-    };
-    handleChange = e => {
-        this.validate(this.state.data);
+    }
+    handleChange = e =>
         this.setState({
             data: {...this.state.data, [e.target.name]: e.target.value},
             errors: {...this.state.errors, [e.target.name]: ""},
-        });
+        })
 
-    };
     handleSubmit = e => {
-        e.preventDefault();
-        let {data} = this.state;
-        const errors = this.validate(data);
-        this.setState({errors});
+        e.preventDefault()
+        const errors = this.validate(this.state.data)
+        this.setState({errors})
         if (Object.keys(errors).length === 0) {
-            this.setState({loading: true});
-            this.props.login({...data}).then(() => {
-                this.props.history.push("/");
-            }).catch(error => {
-                let err = {};
-                this.setState({
-                    loading: false
-                });
-
-                for (let i = 0; i <= Object.keys(data).length - 1; i++) {
-                    errors[Object.keys(data)[i]] = error.response.data.errors.global
-                }
-
-                this.setState({errors})
-            });
-            setTimeout(() => this.props
-                .role(localStorage.getItem("token")), 500);
+            this.setState({loading: true})
+            this.props
+                .submit(this.state.data)
+                .catch(error =>
+                    this.setState({errors: error.response.data.errors, loading: false}),
+                )
         }
-    };
+    }
 
     validate(data) {
-        const errors = {};
-        if (!data.email) errors.email = errors.email || "Email cannot be blank";
-        if (!data.password) errors.password = errors.password || "Password cannot be blank";
+        const errors = {}
+        if (!data.email) errors.email = "Email cannot be blank"
+        if (!data.password) errors.password = "Password cannot be blank"
 
         return errors
     }
 
-    clearAll = (e) => {
-        this.setState({
-            errors: {},
-            data: initialData,
-            loading: false
-        })
-    };
-
     render() {
-        const {data, errors, loading} = this.state;
-        const cls = loading ? "ui form loading" : "ui form";
+        const {data, errors, loading} = this.state
+        const cls = loading ? "ui form loading" : "ui form"
         return (
             <form className={cls} onSubmit={this.handleSubmit}>
                 <div className={errors.email ? "error field" : "field"}>
@@ -80,6 +58,7 @@ class LoginForm extends React.Component {
                     />
                     <FormMessage>{errors.email}</FormMessage>
                 </div>
+
                 <div className={errors.password ? "error field" : "field"}>
                     <label>Password</label>
                     <input
@@ -93,11 +72,8 @@ class LoginForm extends React.Component {
                     <FormMessage>{errors.password}</FormMessage>
                 </div>
                 <div className="ui fluid buttons">
+                    <button className="ui button primary">Login</button>
 
-                    {<button
-                        className={`ui ${errors.serverError ? "red" : ""} button primary`}>
-                        {errors.serverError ? "Clear all" : "Login"}
-                    </button>}
                     <div className="or"/>
 
                     <Link to="/" className="ui button">
