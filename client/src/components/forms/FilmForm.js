@@ -1,7 +1,8 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
 import {Link} from "react-router-dom"
 import ReactImageFallback from "react-image-fallback"
 import FormMessage from "./FormMessage"
+import setFormObject from "./FormUtils"
 
 const initialData = {
   _id: null,
@@ -14,33 +15,20 @@ const initialData = {
   featured: false,
 }
 
-class FilmForm extends React.Component {
-  state = {
-    data: initialData,
-    errors: {},
-    loading: false,
-  }
+const FilmForm = props => {
+    const [data, setData] = useState(initialData)
+    const [errors, setErrors] = useState({})
+    const [loading, setLoading] = useState(false)
 
-  componentDidMount() {
-    if (this.props.film._id) {
-      this.setState({data: this.props.film})
-    }
-  }
+    useEffect(() => {
+        if (props.film._id && props.film._id !== data._id) {
+            setData(props.film)
+        } else {
+            setData(initialData)
+        }
+    }, [props.film._id])
 
-  static getDerivedStateFromProps(props, state) {
-    const {film} = props
-    const {data} = state
-
-    if (film._id && film._id !== data._id) {
-      return {...state, data: film}
-    }
-    if (!film._id && data._id !== null) {
-      return {...state, data: initialData}
-    }
-    return null
-  }
-
-  validate(data) {
+    const validate = data => {
     const errors = {}
     if (!data.title) errors.title = "Title cannot be blank"
     if (!data.description) errors.description = "description cannot be blank"
@@ -56,43 +44,22 @@ class FilmForm extends React.Component {
     return errors
   }
 
-  handleSubmit = e => {
+    const handleSubmit = e => {
     e.preventDefault()
-    const errors = this.validate(this.state.data)
-    this.setState({errors})
+        const errors = validate(data)
+        setErrors(errors)
     if (Object.keys(errors).length === 0) {
-      this.setState({loading: true})
-      this.props
-          .submit(this.state.data)
-          .catch(err =>
-              this.setState({errors: err.response.data.errors, loading: false}),
-          )
+        setLoading(true)
+        props.submit(data).catch(error => {
+            setErrors(error.response.data.errors)
+            setLoading(false)
+        })
     }
   }
-
-  handleStringChange = e =>
-      this.setState({
-          data: {...this.state.data, [e.target.name]: e.target.value},
-          errors: {...this.state.errors, [e.target.name]: ""},
-      })
-
-  handleNumberChange = e =>
-      this.setState({
-          data: {...this.state.data, [e.target.name]: parseFloat(e.target.value)},
-          errors: {...this.state.errors, [e.target.name]: ""},
-      })
-
-  handleCheckboxChange = e =>
-      this.setState({
-          data: {...this.state.data, [e.target.name]: e.target.checked},
-      })
-
-  render() {
-    const {data, errors, loading} = this.state
     return (
         <form
             className={loading ? "ui form loading" : "ui form"}
-            onSubmit={this.handleSubmit}
+            onSubmit={handleSubmit}
         >
             <div className="ui  grid">
                 <div className="twelve wide column">
@@ -105,7 +72,7 @@ class FilmForm extends React.Component {
                             id="name"
                             placeholder="film title"
                             value={data.title}
-                            onChange={this.handleStringChange}
+                            onChange={setFormObject(setData, data)}
                         />
                         <FormMessage>{errors.title}</FormMessage>
                     </div>
@@ -118,7 +85,7 @@ class FilmForm extends React.Component {
                             id="description"
                             placeholder="film description"
                             value={data.description}
-                            onChange={this.handleStringChange}
+                            onChange={setFormObject(setData, data)}
                         />
                         <FormMessage>{errors.description}</FormMessage>
                     </div>
@@ -144,7 +111,7 @@ class FilmForm extends React.Component {
                             id="img"
                             placeholder="img"
                             value={data.img}
-                            onChange={this.handleStringChange}
+                            onChange={setFormObject(setData, data)}
                         />
                         <FormMessage>{errors.img}</FormMessage>
                     </div>
@@ -161,7 +128,7 @@ class FilmForm extends React.Component {
                             id="director"
                             placeholder="film director"
                             value={data.director}
-                            onChange={this.handleStringChange}
+                            onChange={setFormObject(setData, data)}
                         />
                         <FormMessage>{errors.director}</FormMessage>
                     </div>
@@ -180,7 +147,7 @@ class FilmForm extends React.Component {
                             id="duration"
                             placeholder="Duration"
                             value={data.duration}
-                            onChange={this.handleNumberChange}
+                            onChange={setFormObject(setData, data)}
                         />
                         <FormMessage>{errors.duration}</FormMessage>
                     </div>
@@ -199,7 +166,7 @@ class FilmForm extends React.Component {
                             id="price"
                             placeholder="price"
                             value={data.price}
-                            onChange={this.handleNumberChange}
+                            onChange={setFormObject(setData, data)}
                         />
                         <FormMessage>{errors.price}</FormMessage>
                     </div>
@@ -214,7 +181,7 @@ class FilmForm extends React.Component {
                         name="featured"
                         id="featured"
                         value={data.featured}
-                        onChange={this.handleCheckboxChange}
+                        onChange={setFormObject(setData, data)}
                     />
                 </div>
                 {/* END Featured */}
@@ -233,7 +200,6 @@ class FilmForm extends React.Component {
             </div>
         </form>
     )
-  }
 }
 
 export default FilmForm
