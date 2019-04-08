@@ -6,35 +6,35 @@ import setFormObject from "./FormUtils"
 const initialData = {
     email: "",
     password: "",
-}
+};
 
 const LoginForm = props => {
-    const [data, setData] = useState(initialData)
-    const [errors, setErrors] = useState({})
-    const [loading, setLoading] = useState(false)
+    const [data, setData] = useState(initialData);
+    const [errors, setErrors] = useState({});
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = e => {
-        e.preventDefault()
-        const errors = validate(data)
-        setErrors(errors)
+        e.preventDefault();
+        const errors = validate(data);
+        setErrors(errors);
         if (Object.keys(errors).length === 0) {
-            setLoading(true)
+            setLoading(true);
             props.submit(data).catch(error => {
-                setErrors(error.response.data.errors)
+                setErrors(error.response.data.errors);
                 setLoading(false)
             })
         }
-    }
+    };
 
     const validate = data => {
-        const errors = {}
-        if (!data.email) errors.email = "Email cannot be blank"
-        if (!data.password) errors.password = "Password cannot be blank"
+        const errors = {};
+        if (!data.email) errors.email = "Email cannot be blank";
+        if (!data.password) errors.password = "Password cannot be blank";
 
         return errors
-    }
+    };
 
-    const cls = loading ? "ui form loading" : "ui form"
+    const cls = loading ? "ui form loading" : "ui form";
     return (
         <form className={cls} onSubmit={handleSubmit}>
             <div className={errors.email ? "error field" : "field"}>
@@ -73,6 +73,6 @@ const LoginForm = props => {
             </div>
         </form>
     )
-}
+};
 
 export default LoginForm

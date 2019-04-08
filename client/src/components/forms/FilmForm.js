@@ -13,12 +13,12 @@ const initialData = {
   price: "",
   img: "",
   featured: false,
-}
+};
 
 const FilmForm = props => {
-    const [data, setData] = useState(initialData)
-    const [errors, setErrors] = useState({})
-    const [loading, setLoading] = useState(false)
+    const [data, setData] = useState(initialData);
+    const [errors, setErrors] = useState({});
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if (props.film._id && props.film._id !== data._id) {
@@ -26,36 +26,36 @@ const FilmForm = props => {
         } else {
             setData(initialData)
         }
-    }, [props.film._id])
+    }, [props.film._id]);
 
     const validate = data => {
-    const errors = {}
-    if (!data.title) errors.title = "Title cannot be blank"
-    if (!data.description) errors.description = "description cannot be blank"
-    if (!data.img) errors.img = "img cannot be blank"
-    if (!data.director) errors.director = "director cannot be blank"
-    if (!data.duration) errors.duration = "duration cannot be blank"
-    if (!data.price) errors.price = "price cannot be blank"
+        const errors = {};
+        if (!data.title) errors.title = "Title cannot be blank";
+        if (!data.description) errors.description = "description cannot be blank";
+        if (!data.img) errors.img = "img cannot be blank";
+        if (!data.director) errors.director = "director cannot be blank";
+        if (!data.duration) errors.duration = "duration cannot be blank";
+        if (!data.price) errors.price = "price cannot be blank";
 
     if (parseFloat(data.duration <= 0))
-      errors.duratino = "duration must be positive value"
+        errors.duratino = "duration must be positive value";
     if (parseFloat(data.price <= 0))
-      errors.price = "price must be positive value"
+        errors.price = "price must be positive value";
     return errors
-  }
+    };
 
     const handleSubmit = e => {
-    e.preventDefault()
-        const errors = validate(data)
-        setErrors(errors)
+        e.preventDefault();
+        const errors = validate(data);
+        setErrors(errors);
     if (Object.keys(errors).length === 0) {
-        setLoading(true)
+        setLoading(true);
         props.submit(data).catch(error => {
-            setErrors(error.response.data.errors)
+            setErrors(error.response.data.errors);
             setLoading(false)
         })
     }
-  }
+    };
     return (
         <form
             className={loading ? "ui form loading" : "ui form"}
@@ -200,6 +200,6 @@ const FilmForm = props => {
             </div>
         </form>
     )
-}
+};
 
 export default FilmForm

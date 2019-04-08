@@ -11,13 +11,13 @@ const FilmsList = ({films}) => (
           films.map(film => <FilmCard key={film._id} film={film}/>)
       )}
     </div>
-)
+);
 
 FilmsList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.object).isRequired,
-}
+};
 FilmsList.defaultProps = {
   films: [],
-}
+};
 
 export default FilmsList

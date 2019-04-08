@@ -33,6 +33,6 @@ const TopNavigation = ({isAuth, logout, isAdmin}) => (
             </div>
         )}
     </div>
-)
+);
 
 export default TopNavigation

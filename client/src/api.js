@@ -24,4 +24,4 @@ export const setAuthorizationHeader = (token = null) => {
   } else {
     delete axios.defaults.headers.common.Authorization
   }
-}
+};

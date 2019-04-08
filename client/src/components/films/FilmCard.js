@@ -5,10 +5,10 @@ import Featured from "./Featured"
 import {FilmsContext} from "../../context"
 
 const FilmCard = ({film}) => {
-    const {deleteFilm, user} = useContext(FilmsContext)
-    const [confirm, setConfirm] = useState(false)
-    const showConfirm = () => setConfirm(true)
-    const hideConfirm = () => setConfirm(false)
+    const {deleteFilm, user} = useContext(FilmsContext);
+    const [confirm, setConfirm] = useState(false);
+    const showConfirm = () => setConfirm(true);
+    const hideConfirm = () => setConfirm(false);
 
     const adminAction = (
         <div className="extra content">
@@ -38,13 +38,13 @@ const FilmCard = ({film}) => {
                 </div>
             )}
         </div>
-    )
+    );
 
     const userAction = (
         <div className="extra content">
             <button className="ui green basic button">Add to cart</button>
         </div>
-    )
+    );
 
     return (
         <div className="ui card">
@@ -58,7 +58,7 @@ const FilmCard = ({film}) => {
             </div>
 
             <div className="content">
-        <span href="#" className="header">
+        <span className="header">
           {film.title}
         </span>
                 <div className="meta">
@@ -74,7 +74,7 @@ const FilmCard = ({film}) => {
             {user.token && user.role === "user" && userAction}
         </div>
     )
-}
+};
 
 FilmCard.propTypes = {
     film: PropTypes.shape({
@@ -84,6 +84,6 @@ FilmCard.propTypes = {
         duration: PropTypes.number.isRequired,
         price: PropTypes.number.isRequired,
     }),
-}
+};
 
 export default React.memo(FilmCard)

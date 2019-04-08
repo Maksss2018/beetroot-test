@@ -8,16 +8,16 @@ const Message = ({msg, icon, color}) => (
             <div className="header">{msg}</div>
         </div>
     </div>
-)
+);
 
 Message.defaultProps = {
     type: "info",
     color: "olive",
-}
+};
 Message.propTypes = {
     msg: PropTypes.string.isRequired,
     type: PropTypes.string,
     color: PropTypes.string,
-}
+};
 
 export default Message
