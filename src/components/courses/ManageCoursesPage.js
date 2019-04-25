@@ -14,9 +14,9 @@ const ManageCoursesPage = ({
   history,
   ...props
 }) => {
-  const [course, setCourse] = useState({...props.course})
+  const [course, setCourse] = useState({...props.course});
+  const [saving, setSaving] = useState(false);
   const [errors, setErrors] = useState({})
-  const [saving, setSaving] = useState(false)
 
   useEffect(() => {
     if (courses.length === 0) {
@@ -34,12 +34,16 @@ const ManageCoursesPage = ({
     }
   }, [props.course])
 
-  function handleChange(e) {
+  function  handleChange(e) {
     const {name, value} = e.target
+    const isValid = formIsValid( name, value );
     setCourse(prev => ({
       ...prev,
       [name]: name === "authorId" ? parseInt(value) : value,
-    }))
+    }));
+
+    setErrors({...errors,[name]:isValid});
+    console.dir({...errors});
   }
 
   function onSave(e) {
@@ -48,6 +52,25 @@ const ManageCoursesPage = ({
     saveCoursesAction(course).then(() => {
       history.push("/courses")
     })
+  }
+
+  const getReg = (strg) => new RegExp(strg);
+
+  function formIsValid (name,value) {
+    const length = value.length;
+    let flag;
+
+    switch (name) {
+      case "title":
+       flag = length === 0 || value.match(/<\s*a[^>]*>(.*?)<\s*\/\s*a>/g)!==null;
+        break;
+      case "category": flag = value === -1  ;
+        break;
+      case "authorId": flag = length === 0 || length > 9 ||  length <= 8// || value.match(//g)!==null;
+        break;
+      default:  flag = false;
+    }
+    return flag
   }
 
   return (
