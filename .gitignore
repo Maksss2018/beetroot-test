@@ -1,0 +1,39 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+.idea
+package-lock.json
+/src(2)
+/src(3)
+/src(4)
+/src(5)
+/src_
+/src_2
+/src_3
+/src_4
+/src_5
+/src_6
+/src_7
+/SRC_NEW
+*.rar
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
