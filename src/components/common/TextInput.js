@@ -17,7 +17,12 @@ const TextInput = ({name, label, onChange, value, error}) => {
         onChange={onChange}
         value={value}
       />
-      {error && <div className="error text-danger">{error}</div>}
+      {
+        error && <div
+        className={`error text-${error.flag?"danger ":"success"}`}
+      >{error.msg}
+      </div>
+      }
     </div>
   )
 }
@@ -27,7 +32,7 @@ TextInput.propTypes = {
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
-  error: PropTypes.string,
+  error: PropTypes.object
 }
 
 export default TextInput

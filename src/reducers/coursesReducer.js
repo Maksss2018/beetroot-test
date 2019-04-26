@@ -9,6 +9,8 @@ export default function(state = [], action) {
       return [...state, {...payload}]
     case C.UPDATE_COURSE_SUCCESS:
       return state.map(course => (course.id === payload.id ? payload : course))
+    case C.DELETE_COURSE_SUCCESS:
+      return state.filter( course => course.id !== payload.id )
     default:
       return state
   }

@@ -27,6 +27,19 @@ export const updateSuccessCourse = course => ({
   payload: course,
 })
 
+export const deleteCourse = id => dispatch =>{
+  return courseApi
+    .deleteCourse(id).then(() => {
+      dispatch({
+        type: C.DELETE_COURSE_SUCCESS,
+        payload: {id}
+      })
+    }).catch(err => {
+      throw err
+    })
+
+}
+
 export const saveCoursesAction = course => dispatch => {
   return courseApi
     .saveCourse(course)

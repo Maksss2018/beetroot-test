@@ -29,7 +29,12 @@ const SelectInput = ({
           ))}
         </select>
       </div>
-      {error && <div className="error text-danger">{error}</div>}
+      {
+        error && <div
+          className={`error text-${error.flag?"danger ":"success"}`}
+        >{error.msg}
+        </div>
+      }
     </div>
   )
 }
@@ -41,7 +46,7 @@ SelectInput.propTypes = {
   defaultOption: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   options: PropTypes.array,
-  error: PropTypes.string,
+  error: PropTypes.object,
 }
 
 export default SelectInput

@@ -15,27 +15,6 @@
       "category": "frontend"
     },
     {
-      "id": 3,
-      "title": "Backend PHP",
-      "slug": "backend-php",
-      "authorId": 2,
-      "category": "backend"
-    },
-    {
-      "id": 4,
-      "title": "Python",
-      "slug": "python-course",
-      "authorId": 2,
-      "category": "backend"
-    },
-    {
-      "id": 5,
-      "title": "Web Design",
-      "slug": "web-design",
-      "authorId": 3,
-      "category": "design"
-    },
-    {
       "id": 6,
       "title": "Databases",
       "slug": "databases",
@@ -57,26 +36,11 @@
       "category": "frontend"
     },
     {
-      "id": 9,
-      "title": "Framework Laravel",
-      "slug": "framework-laravel",
-      "authorId": 2,
-      "category": "backend"
-    },
-    {
       "id": 10,
       "title": "Framework Symphony",
       "slug": "framework-symphony",
       "authorId": 2,
       "category": "backend"
-    },
-    {
-      "id": 11,
-      "title": "New Cours",
-      "authorId": 2,
-      "category": "Some text",
-      "createdAt": 1556196591840,
-      "slug": "new-cours"
     }
   ],
   "authors": [
