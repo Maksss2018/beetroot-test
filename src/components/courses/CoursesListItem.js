@@ -1,4 +1,4 @@
-import React,{useState} from "react"
+import React from "react"
 import {connect} from "react-redux"
 import {deleteCourse} from "../../ac/coursesActions"
 import {Link} from "react-router-dom"
