@@ -19,7 +19,7 @@
  
    ```To see  result of my work just clone  default master branch and run index.html in browser```  
  
-  #####**Requirements**:  
+ #####**Requirements**:  
  
   1. Code should be written Vanilla JavaScript - dont use any JavaScript libs or  framework's.
  
