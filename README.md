@@ -1,6 +1,6 @@
 # Beetroot Academy 
 ## Course : Advanced Javascript Developer 
-  This repos accumulate result`s of my studding in  [Beetroot Academy](https://beetroot.academy/en/).
+  This repos accumulate result's of my studding in  [Beetroot Academy](https://beetroot.academy/en/).
 
   All results a sorted by studding projects in this repository by  [***branches*** ](https://github.com/Maksss2018/beetroot-test/branches): 
  1. [master](https://github.com/Maksss2018/beetroot-test/) branch: 
@@ -9,7 +9,7 @@
  4. [cinema_project](https://github.com/Maksss2018/beetroot-test/tree/cinema_project) branch:
  5. [cinema_project_my_on_variant](https://github.com/Maksss2018/beetroot-test/tree/cinema_project_my_on_variant) branch:
  6. [cinema_project_hw](https://github.com/Maksss2018/beetroot-test/tree/cinema_project_hw) branch:
- 7master branch. [cinema_project_server_with_db](https://github.com/Maksss2018/beetroot-test/tree/cinema_project_server_with_db)
+ 7. [cinema_project_server_with_db](https://github.com/Maksss2018/beetroot-test/tree/cinema_project_server_with_db)
  8. [hw_courses_project_27_apr](https://github.com/Maksss2018/beetroot-test/tree/hw_courses_project_27_apr)
  9. [courses_proj_by_oogway](https://github.com/Maksss2018/beetroot-test/tree/courses_proj_by_oogway)
  
@@ -33,7 +33,7 @@ packed item's, unpacked item's
 ---
 ####Result 
  
- In this  task  used context  to store date of new item`s,
+ In this  task  used context  to store data of new item's,
  array of  items id's that match search request and  item's that been packed and unpacked.
  
  ```
