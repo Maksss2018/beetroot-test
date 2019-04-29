@@ -1,5 +1,4 @@
 # Beetroot Academy 
- ***  
 ## Course : Advanced Javascript Developer 
   This repos accumulate result`s of my studding in  [Beetroot Academy](https://beetroot.academy/en/).
 
