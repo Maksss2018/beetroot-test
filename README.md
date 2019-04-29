@@ -1,4 +1,9 @@
 # Beetroot Academy 
+ ***  
+## Course : Advanced Javascript Developer 
+  This repos accumulate result`s of my studding in  [Beetroot Academy](https://beetroot.academy/en/).
+
+  All results a sorted by studding projects in this repository by  [***branches*** ](https://github.com/Maksss2018/beetroot-test/branches): 
  1.  ***master branch***
  2. [hooks_search_three_inputs](https://github.com/Maksss2018/beetroot-test/tree/hooks_search_three_imputs) branch:
  3. [hooks_search_three_inputs_shugar](https://github.com/Maksss2018/beetroot-test/tree/hooks_search_three_inputs_shugar) branch:
@@ -9,10 +14,7 @@
  8. [hw_courses_project_27_apr](https://github.com/Maksss2018/beetroot-test/tree/hw_courses_project_27_apr)
  9. [courses_proj_by_oogway](https://github.com/Maksss2018/beetroot-test/tree/courses_proj_by_oogway)
  
-## Course : Advanced Javascript Developer 
-  This repos accumulate result`s of my studding in  [Beetroot Academy](https://pip.pypa.io/en/stable/).
-
-  All results a sorted by studding projects in this repository by  [***branches*** ](https://github.com/Maksss2018/beetroot-test/branches): 
+ ---
  
   [***master branch***](https://github.com/Maksss2018/beetroot-test) ( commit 366dc05 ) is my  "Entrance" exam that I`ve write on vanilla JavaScript:
    The task  was  to  write functionality for e-shop from ready html: 
