@@ -20,16 +20,22 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
  One of the first  task vere we were  using   class's and life cycle methods.
  To start this studding project run `npm install` and `npm start` in your console.
  Don't forget to run `nvm use 10` - switch to NODE version 10  
-###Task :
-* make three  list : new items List
+
+####Task :
+
+* make three  list : new items List,
 packed item's, unpacked item's
+
 * make functionality:
  1. for two fields add new item, search items;
  2. items 'checkbox' (packed,unpack, delete):
+
 ---
-###Result 
+####Result 
+ 
  In this  task  used context  to store date of new item`s,
  array of  items id's that match search request and  item's that been packed and unpacked.
+ 
  ```
 import React, { Component } from 'react'; // using es6  standards
 import PropTypes from 'prop-types';
