@@ -4,14 +4,14 @@
 
   All results a sorted by studding projects in this repository by  [***branches*** ](https://github.com/Maksss2018/beetroot-test/branches): 
  1.  ***master branch***
- 2. [hooks_search_three_inputs](https://github.com/Maksss2018/beetroot-test/tree/hooks_search_three_imputs) branch:
- 3. [hooks_search_three_inputs_shugar](https://github.com/Maksss2018/beetroot-test/tree/hooks_search_three_inputs_shugar) branch:
- 4. [cinema_project](https://github.com/Maksss2018/beetroot-test/tree/cinema_project) branch:
- 5. [cinema_project_my_on_variant](https://github.com/Maksss2018/beetroot-test/tree/cinema_project_my_on_variant) branch:
- 6. [cinema_project_hw](https://github.com/Maksss2018/beetroot-test/tree/cinema_project_hw) branch:
- 7master branch. [cinema_project_server_with_db](https://github.com/Maksss2018/beetroot-test/tree/cinema_project_server_with_db)
- 8. [hw_courses_project_27_apr](https://github.com/Maksss2018/beetroot-test/tree/hw_courses_project_27_apr)
- 9. [courses_proj_by_oogway](https://github.com/Maksss2018/beetroot-test/tree/courses_proj_by_oogway)
+ 2. [hooks_search_three_inputs](https://github.com/Maksss2018/beetroot-test/tree/hooks_search_three_imputs/#readme) branch:
+ 3. [hooks_search_three_inputs_shugar](https://github.com/Maksss2018/beetroot-test/tree/hooks_search_three_inputs_shugar/#readme) branch:
+ 4. [cinema_project](https://github.com/Maksss2018/beetroot-test/tree/cinema_project/#readme) branch:
+ 5. [cinema_project_my_on_variant](https://github.com/Maksss2018/beetroot-test/tree/cinema_project_my_on_variant/#readme) branch:
+ 6. [cinema_project_hw](https://github.com/Maksss2018/beetroot-test/tree/cinema_project_hw/#readme) branch:
+ 7master branch. [cinema_project_server_with_db](https://github.com/Maksss2018/beetroot-test/tree/cinema_project_server_with_db/#readme)
+ 8. [hw_courses_project_27_apr](https://github.com/Maksss2018/beetroot-test/tree/hw_courses_project_27_apr/#readme)
+ 9. [courses_proj_by_oogway](https://github.com/Maksss2018/beetroot-test/tree/courses_proj_by_oogway/#readme)
  
  ---
  
