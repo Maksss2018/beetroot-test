@@ -48,7 +48,7 @@ export const ManageCoursesPage = ({
     }))
   }
 
-  function formIsValid() {
+  const formIsValid = () => {
     const errors = {}
     if (!course.title) errors.title = "Title cannot be blank"
     if (!course.authorId) errors.authorId = "authorId cannot be blank"
@@ -59,7 +59,7 @@ export const ManageCoursesPage = ({
     return Object.keys(errors).length === 0
   }
 
-  function onSave(e) {
+  const onSave = (e) => {
     e.preventDefault()
     if (!formIsValid()) {
       return
@@ -76,29 +76,48 @@ export const ManageCoursesPage = ({
       })
   }
 
-  return (
-    <div className="container mt-5">
-      <h1>Manage Course Page</h1>
-      {courses.length === 0 || authors.length === 0 ? (
-        <Spinner />
-      ) : (
-        <CourseForm
+  return (<ManageCoursesPageJsx
           onSave={onSave}
           onChange={handleChange}
           course={course}
           authors={authors}
           errors={errors}
           saving={saving}
-        />
-      )}
-    </div>
-  )
+          cLength={course.length}
+          aLength={authors.length}
+        />)
 }
 
-function mapStateToProps(state, ownProps) {
+const ManageCoursesPageJsx = ({
+                             onSave,
+                             handleChange,
+                             errors,
+                             saving,
+                             courses,
+                             authors,
+                             cLength,
+                             aLength,
+                           }) => (
+    <div className="container mt-5">
+      <h1>Manage Course Page</h1>
+      {cLength === 0 || aLength === 0 ? (
+          <Spinner />
+      ) : (
+          <CourseForm
+              onSave={onSave}
+              onChange={handleChange}
+              course={courses}
+              authors={authors}
+              errors={errors}
+              saving={saving}
+          />
+      )}
+    </div>
+);
+
+const mapStateToProps = (state, ownProps) => {
   const {courses, authors} = state
   const slug = ownProps.match.params.slug
-
   const course =
     slug && courses.length > 0
       ? courses.find(c => c.slug === slug) || null
@@ -109,7 +128,7 @@ function mapStateToProps(state, ownProps) {
     authors,
     course,
   }
-}
+};
 
 export default connect(
   mapStateToProps,
