@@ -36,7 +36,7 @@ export const ManageCoursesPage = ({
     }
   }, [props.course])
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     const {name, value} = e.target
     setCourse(prev => ({
       ...prev,
