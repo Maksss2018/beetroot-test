@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>test task JavaScript advanced</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app-container pt-40">
+    <div class="top-cart">
+        <div class="top-cart-info">
+            <div class="container top-cart-info-container">
+                <span class="top-cart-info__item">
+                     Товаров в корзине - <span id="total_cont" class="red-info">0</span>,
+                      на сумму <span id="total_sum" class="red-info">0</span> грн</span>
+                <button id="confirmBtn" class="btn-check">Оформить заказ</button>
+            </div>
+        </div><!-- /.top-cart-info -->
+    </div><!-- /.top-cart -->
+
+
+
+    <header class="top-header">
+        <div class="container">
+            <h1>Welcome to our site</h1>
+        </div>
+    </header>
+
+    <div class="wrap">
+        <section class="container">
+            <!-- /filter-box START-->
+            <div id="filter-container" class="filter-box ">
+            </div>
+            <!-- /filter-box END-->
+
+
+            <!-- /product-box START -->
+            <div id="items-container" class="products-box grid-box">
+            </div>
+            <!-- /product-box END-->
+
+        </section>
+    </div>
+
+    <footer class="bottom-footer bg-beetroot py-1">
+        <div class="container">
+            <div class="footer-row">
+                <div class="col-md-3">Beetroot &copy;2018</div>
+                <div class="col-md-9 text-center">
+                    <a target="_blank" href="https://academy.beetroot.se/?">Bettroot academy  2018</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div><!-- /.app-container -->
+
+<script  src="js/templates.js" type="module">
+</script>
+<script  src="js/methods.js" type="module">
+</script>
+<script src="js/main.js" type="module">
+
+</script>
+</body>
+</html>
